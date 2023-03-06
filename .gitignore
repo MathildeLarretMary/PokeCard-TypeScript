@@ -7,6 +7,7 @@
 .install.md
 src\Request
 src\Functions
+tsconfing.json
 
 # testing
 /coverage
