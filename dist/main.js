@@ -1,3 +1,2 @@
-"use strict";
-console.log("hello");
+import './nav.js';
 //# sourceMappingURL=main.js.map
