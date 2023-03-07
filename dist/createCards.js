@@ -1,6 +1,7 @@
 //--------------------------IMPORTS----------------------------
 import { URL_ALL_PKM, fetchIt } from './request.js';
 //--------------------------CONSTANTES----------------------------
+// on récupère la div "app" du document HTML
 const app = document.querySelector('#app');
 // TODO: Est-ce pertinant de créer une interface pour les Cards?
 // interface Card {
@@ -18,16 +19,21 @@ const app = document.querySelector('#app');
  */
 function constructCards(datas) {
     // console.log(datas);
+    // pour chaque élément dans datas
     for (let pkm of datas) {
         // TODO: récupérer chacunes des stats de pkm.stats et mettre dans <div><ul><li>STAT</li></ul></div>
         // console.log(pkm.stats);
+        // on crée une div
         let div = document.createElement('div');
+        // qui aura la class "card"
         div.classList.add('card');
+        // dans laquelle il y aura
         div.innerHTML = `
         <span class="card-gen">Gen : ${pkm.apiGeneration}</span>
         <img src="${pkm.sprite}" class="card-img">
         <span class="card-name">${pkm.name}</span>
         `;
+        // puis on rajoute chaque div dans la div "app"
         app.append(div);
     }
     return datas;
