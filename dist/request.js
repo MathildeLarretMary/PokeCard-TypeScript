@@ -1,4 +1,4 @@
-"use strict";
+/* API : 'https://pokebuildapi.fr/api/v1'*/
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,9 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-/* API : 'https://pokebuildapi.fr/api/v1'*/
 //----------------------------CONSTANTES-------------------------------
-const URL_ALL_PKM = 'https://pokebuildapi.fr/api/v1/pokemon';
+export const URL_ALL_PKM = 'https://pokebuildapi.fr/api/v1/pokemon';
 //------------------------------FECHTES-------------------------------
 /**
  *
@@ -19,13 +18,13 @@ const URL_ALL_PKM = 'https://pokebuildapi.fr/api/v1/pokemon';
  * @param callback ici (datas : {}[]) => {}[] ---> les données passées et retournées sont un tableau d'objet ===> JSON
  * @returns
  */
-const fetchIt = (_url, callback) => __awaiter(void 0, void 0, void 0, function* () {
+export const fetchIt = (_url, callback) => __awaiter(void 0, void 0, void 0, function* () {
     // Pour vérifier que tout se passe bien, on utilise un block "try/catch"
     try {
         // response va récupérer les résultats de la requête avec fetch()
         let response = yield fetch(_url);
         // if status === 200, ---> tout est ok
-        if (response.ok === true) {
+        if (response.ok) {
             // on met le résultat de response.json() dans un table d'objets nommé "data"
             let data = yield response.json();
             // on donne ensuite ce tableau d'objet à la fonction callback
@@ -49,6 +48,7 @@ let pkmNameList = [];
  * @returns pkmNameList - Tableau rempli d'objets de type PokemonName
  */
 function getAllNames(datas) {
+    // console.log(datas);
     // pour chaque élément dans datas
     for (let data of datas) {
         // crée un objet de type PokemonName
@@ -59,7 +59,7 @@ function getAllNames(datas) {
         // puis on push l'objet dans le tableau pkmNameList
         pkmNameList.push(pkmNameId);
     }
-    console.log(pkmNameList);
+    // console.log(pkmNameList);
     return pkmNameList;
 }
 //----------------------------USE FECTHES FUNCTIONS-------------------------------

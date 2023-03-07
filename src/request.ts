@@ -1,6 +1,7 @@
 /* API : 'https://pokebuildapi.fr/api/v1'*/
+
 //----------------------------CONSTANTES-------------------------------
-const URL_ALL_PKM:string = 'https://pokebuildapi.fr/api/v1/pokemon'
+export const URL_ALL_PKM:string = 'https://pokebuildapi.fr/api/v1/pokemon'
 
 
 //------------------------------FECHTES-------------------------------
@@ -12,13 +13,13 @@ const URL_ALL_PKM:string = 'https://pokebuildapi.fr/api/v1/pokemon'
  * @param callback ici (datas : {}[]) => {}[] ---> les données passées et retournées sont un tableau d'objet ===> JSON
  * @returns 
  */
-const fetchIt = async (_url:string , callback: (datas : Datas[]) => {}[] ) => {
+export const fetchIt = async (_url:string , callback: (datas : Datas[]) => {}[] ) => {
     // Pour vérifier que tout se passe bien, on utilise un block "try/catch"
     try {
         // response va récupérer les résultats de la requête avec fetch()
         let response = await fetch(_url)
         // if status === 200, ---> tout est ok
-        if(response.ok === true) {
+        if(response.ok) {
             // on met le résultat de response.json() dans un table d'objets nommé "data"
             let data:Datas[] = await response.json()
             // on donne ensuite ce tableau d'objet à la fonction callback
@@ -36,7 +37,7 @@ const fetchIt = async (_url:string , callback: (datas : Datas[]) => {}[] ) => {
 //----------------------------DEFINITIONS-------------------------------
 // On crée le type de ce que l'on reçois 
 // (ex: dans les paramètres d'une fonction)
-interface Datas {
+export interface Datas {
     name:string,
     id:number,
     // permet de définir des propriétés dynamiques 
@@ -55,14 +56,14 @@ let pkmNameList: PokemonName[] = []
 
 
 //----------------------------FONCTIONS CALLBACK-------------------------------
-
-
 /**
  * 
  * @param datas prends un paramètre du type Datas ---> interface Datas
  * @returns pkmNameList - Tableau rempli d'objets de type PokemonName
  */
 function getAllNames(datas : Datas[]) : PokemonName[] {
+    // console.log(datas);
+    
     // pour chaque élément dans datas
     for(let data of datas) {
         // crée un objet de type PokemonName
@@ -73,14 +74,12 @@ function getAllNames(datas : Datas[]) : PokemonName[] {
         // puis on push l'objet dans le tableau pkmNameList
         pkmNameList.push(pkmNameId) 
     }
-    console.log(pkmNameList);
+    // console.log(pkmNameList);
     
     return pkmNameList
 }
 
-
 //----------------------------USE FECTHES FUNCTIONS-------------------------------
-
 fetchIt(URL_ALL_PKM, getAllNames) 
 // getAllPkms(datas : {}[]) ---> callbak: (datas : {}[])
 
