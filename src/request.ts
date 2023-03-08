@@ -52,7 +52,7 @@ interface PokemonName {
 }
 
 // on crée le tableau qui va acueillir tous les objets de type pokemonName
-let pkmNameList: PokemonName[] = []
+export let pkmNameList: PokemonName[] = []
 
 
 //----------------------------FONCTIONS CALLBACK-------------------------------
@@ -61,7 +61,7 @@ let pkmNameList: PokemonName[] = []
  * @param datas prends un paramètre du type Datas ---> interface Datas
  * @returns pkmNameList - Tableau rempli d'objets de type PokemonName
  */
-function getAllNames(datas : Datas[]) : PokemonName[] {
+export function getAllNames(datas : Datas[]) : PokemonName[] {
     // console.log(datas);
     
     // pour chaque élément dans datas

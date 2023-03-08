@@ -29,9 +29,17 @@ function constructCards(datas) {
         div.classList.add('card');
         // dans laquelle il y aura
         div.innerHTML = `
-        <span class="card-gen">Gen : ${pkm.apiGeneration}</span>
+        <h2 class="card-gen">Gen : ${pkm.apiGeneration}</h2>
         <img src="${pkm.sprite}" class="card-img">
         <span class="card-name">${pkm.name}</span>
+        <div class="card-stats">
+            <span class="card-stat">HP : ${pkm.stats.HP}</span>
+            <span class="card-stat">Att : ${pkm.stats.attack}</span>
+            <span class="card-stat">Def : ${pkm.stats.defense}</span>
+            <span class="card-stat"> Att.Spé : ${pkm.stats.special_attack}</span>
+            <span class="card-stat">Def.Spé : ${pkm.stats.special_defense}</span>
+            <span class="card-stat">Vit : ${pkm.stats.speed}</span>
+        </div>
         `;
         // puis on rajoute chaque div dans la div "app"
         app.append(div);

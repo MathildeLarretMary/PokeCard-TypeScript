@@ -40,14 +40,14 @@ export const fetchIt = (_url, callback) => __awaiter(void 0, void 0, void 0, fun
     }
 });
 // on crée le tableau qui va acueillir tous les objets de type pokemonName
-let pkmNameList = [];
+export let pkmNameList = [];
 //----------------------------FONCTIONS CALLBACK-------------------------------
 /**
  *
  * @param datas prends un paramètre du type Datas ---> interface Datas
  * @returns pkmNameList - Tableau rempli d'objets de type PokemonName
  */
-function getAllNames(datas) {
+export function getAllNames(datas) {
     // console.log(datas);
     // pour chaque élément dans datas
     for (let data of datas) {
