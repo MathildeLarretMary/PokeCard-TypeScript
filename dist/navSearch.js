@@ -11,7 +11,7 @@ nav_submit.addEventListener('click', () => {
     }
 });
 nav_input.addEventListener('keyup', () => {
-    var _a;
+    var _a, _b;
     // create list with all names includes input.value on keyup
     let allFindedList = [];
     //if there is 'ul' on navbar, delete if on keyup to have new 'ul' list
@@ -27,11 +27,12 @@ nav_input.addEventListener('keyup', () => {
         }
     });
     console.log(allFindedList);
-    ul.remove();
     createAllLis(ul, allFindedList);
+    if (nav_input.value === "" && navbar.querySelector('ul')) {
+        (_b = navbar.querySelector('ul')) === null || _b === void 0 ? void 0 : _b.remove();
+    }
 });
 function createAllLis(ElementHTML, list) {
-    console.log(ElementHTML);
     list.map((e) => {
         // create li list
         let li = document.createElement('li');

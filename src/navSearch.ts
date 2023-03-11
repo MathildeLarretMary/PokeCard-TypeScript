@@ -15,6 +15,7 @@ nav_submit.addEventListener('click', () => {
     }    
 })
 
+
 nav_input.addEventListener('keyup', () => {
     // create list with all names includes input.value on keyup
     let allFindedList : Array<[number, string]> = []
@@ -27,6 +28,7 @@ nav_input.addEventListener('keyup', () => {
     let ul = document.createElement('ul')! as HTMLUListElement
     ul.classList.add('list-finded')
 
+
     // afficher les "name" de chaque pkm qui contient input.value
     pkmNameList.forEach((element: PokemonName) =>  {
         if(element.name.toLowerCase().includes(nav_input.value.toLowerCase())) {
@@ -36,14 +38,16 @@ nav_input.addEventListener('keyup', () => {
     })
 
     console.log(allFindedList);
-    ul.remove()
 
     createAllLis(ul, allFindedList)
+
+    if(nav_input.value === "" && navbar.querySelector('ul')) {
+        navbar.querySelector('ul')?.remove()
+    }
 
 })
 
 function createAllLis(ElementHTML:HTMLUListElement, list : Array<[number, string]>) : void {
-    console.log(ElementHTML);
     list.map((e) => {
         // create li list
         let li = document.createElement('li') as HTMLLIElement
