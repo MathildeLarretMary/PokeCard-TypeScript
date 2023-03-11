@@ -45,7 +45,7 @@ export let pkmNameList = [];
 //----------------------------FONCTIONS CALLBACK-------------------------------
 /**
  *
- * @param datas prends un paramètre du type Datas ---> interface Datas
+ * @param datas prends un paramètre du type Data ---> interface Data
  * @returns pkmNameList - Tableau rempli d'objets de type PokemonName
  */
 export function getAllNames(data) {
