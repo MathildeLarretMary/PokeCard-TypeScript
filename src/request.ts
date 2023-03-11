@@ -57,7 +57,7 @@ export interface Data {
 }
 
 // Interface de ce qu'on souhaite avoir au final ---> on crée donc un nouveau type
-interface PokemonName {
+export interface PokemonName {
     pokeid: number,
     name: string,
 }

@@ -1,8 +1,9 @@
-import {  pkmNameList } from "./request.js";
+import {  pkmNameList, PokemonName } from "./request.js";
 
 // Get nav-input and nav-submit
 const nav_input = document.querySelector('.nav-input')! as HTMLInputElement
 const nav_submit = document.querySelector('.nav-submit') as HTMLButtonElement
+const navbar = document.querySelector('.navbar')! as HTMLElement
 
  
 
@@ -14,9 +15,34 @@ nav_submit.addEventListener('click', () => {
     }    
 })
 
+// TODO: be able to remove ul>li  on keyup to show new list 
 nav_input.addEventListener('keyup', () => {
-    //TODO: afficher les "name" de chaque pkm qui contient input.value
-    //TODO: create list with all names includes input.value on keyup
-    // REGEX!!!!!!!!!!!!
-    console.log(nav_input.value); 
+    // create list with all names includes input.value on keyup
+    let allFindedList : Array<[number, string]> = []
+
+    // create ul list
+    let ul = document.createElement('ul') as HTMLUListElement
+    ul.classList.add('list-finded')
+
+    // afficher les "name" de chaque pkm qui contient input.value
+    pkmNameList.forEach((element: PokemonName) =>  {
+        if(element.name.toLowerCase().includes(nav_input.value.toLowerCase())) {
+            allFindedList.push([element.pokeid, element.name])
+            return allFindedList
+        }
+    })
+
+    console.log(allFindedList);
+    
+
+    allFindedList.map((e) => {
+        // create li list
+        let li = document.createElement('li') as HTMLLIElement
+        li.classList.add('list-fined-li')
+        li.textContent = e[1]
+        // ul.remove()
+        ul.append(li)
+        })
+
+    navbar.append(ul)
 })
