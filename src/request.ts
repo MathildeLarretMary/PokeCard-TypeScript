@@ -10,10 +10,10 @@ export const URL_ALL_PKM:string = 'https://pokebuildapi.fr/api/v1/pokemon'
  * 
  * @param _url paramètre qui prend l'URL pour la méthodes fetch()
  * @param callback fonction callback qui va exécuter la fonction sur les éléments récupérés
- * @param callback ici (datas : {}[]) => {}[] ---> les données passées et retournées sont un tableau d'objet ===> JSON
+ * @param callback ici (data : {}[]) => {}[] ---> les données passées et retournées sont un tableau d'objet ===> JSON
  * @returns 
  */
-export const fetchIt = async (_url:string , callback: (datas : Datas[]) => {}[] ) => {
+export const fetchIt = async (_url:string , callback: (datas : Data[]) => {}[] ) => {
     // Pour vérifier que tout se passe bien, on utilise un block "try/catch"
     try {
         // response va récupérer les résultats de la requête avec fetch()
@@ -21,7 +21,9 @@ export const fetchIt = async (_url:string , callback: (datas : Datas[]) => {}[] 
         // if status === 200, ---> tout est ok
         if(response.ok) {
             // on met le résultat de response.json() dans un table d'objets nommé "data"
-            let data:Datas[] = await response.json()
+            let data:Data[] = await response.json()
+            console.log(data);
+            
             // on donne ensuite ce tableau d'objet à la fonction callback
             callback(data)
             // return pour finir l'instruction de la fonction
@@ -37,12 +39,21 @@ export const fetchIt = async (_url:string , callback: (datas : Datas[]) => {}[] 
 //----------------------------DEFINITIONS-------------------------------
 // On crée le type de ce que l'on reçois 
 // (ex: dans les paramètres d'une fonction)
-export interface Datas {
-    name:string,
+export interface Data {
     id:number,
-    // permet de définir des propriétés dynamiques 
-    // (utile lorsqu'on que connais pas tout ce qu'on reçois)
-    [props:string] : any
+    name:string,
+    image: string,
+    sprite: string,
+    apiGeneration:number,
+    stats : {
+        HP:number,
+        attack:number,
+        defense:number,
+        special_attack:number,
+        special_defense:number,
+        speed:number
+    },
+    apiTypes: [{name:string}, {name?:string}]
 }
 
 // Interface de ce qu'on souhaite avoir au final ---> on crée donc un nouveau type
@@ -61,15 +72,15 @@ export let pkmNameList: PokemonName[] = []
  * @param datas prends un paramètre du type Datas ---> interface Datas
  * @returns pkmNameList - Tableau rempli d'objets de type PokemonName
  */
-export function getAllNames(datas : Datas[]) : PokemonName[] {
+export function getAllNames(data : Data[]) : PokemonName[] {
     // console.log(datas);
     
     // pour chaque élément dans datas
-    for(let data of datas) {
+    for(let datum of data) {
         // crée un objet de type PokemonName
         const pkmNameId: PokemonName = {
-            pokeid: data.id,
-            name: data.name,
+            pokeid: datum.id,
+            name: datum.name,
         }  
         // puis on push l'objet dans le tableau pkmNameList
         pkmNameList.push(pkmNameId) 

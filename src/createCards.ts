@@ -1,5 +1,5 @@
 //--------------------------IMPORTS----------------------------
-import { URL_ALL_PKM, fetchIt, Datas } from './request.js';
+import { URL_ALL_PKM, fetchIt, Data } from './request.js';
 
 //--------------------------CONSTANTES----------------------------
 // on récupère la div "app" du document HTML
@@ -21,12 +21,9 @@ const app = document.querySelector('#app')! as HTMLDivElement
  * crée une carte dans le DOM pour chaque élément dans datas
  * @returns 
  */
-function constructCards(datas : Datas[]) : Datas[] {
-    // console.log(datas);
+function constructCards(datas : Data[]) : Data[] {
     // pour chaque élément dans datas
     for(let pkm of datas) {
-        // TODO: récupérer chacunes des stats de pkm.stats et mettre dans <div><ul><li>STAT</li></ul></div>
-        // console.log(pkm.stats);
         // on crée une div
         let div = document.createElement('div') as HTMLDivElement
         // qui aura la class "card"
@@ -44,7 +41,9 @@ function constructCards(datas : Datas[]) : Datas[] {
             <span class="card-stat">Def.Spé : ${pkm.stats.special_defense}</span>
             <span class="card-stat">Vit : ${pkm.stats.speed}</span>
         </div>
-        `
+        `;
+        console.log(pkm.apiTypes[0].name, pkm.apiTypes[1] ? pkm.apiTypes[1].name : "");
+        
         // puis on rajoute chaque div dans la div "app"
         app.append(div)
     }

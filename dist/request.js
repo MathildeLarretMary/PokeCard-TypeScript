@@ -15,7 +15,7 @@ export const URL_ALL_PKM = 'https://pokebuildapi.fr/api/v1/pokemon';
  *
  * @param _url paramètre qui prend l'URL pour la méthodes fetch()
  * @param callback fonction callback qui va exécuter la fonction sur les éléments récupérés
- * @param callback ici (datas : {}[]) => {}[] ---> les données passées et retournées sont un tableau d'objet ===> JSON
+ * @param callback ici (data : {}[]) => {}[] ---> les données passées et retournées sont un tableau d'objet ===> JSON
  * @returns
  */
 export const fetchIt = (_url, callback) => __awaiter(void 0, void 0, void 0, function* () {
@@ -27,6 +27,7 @@ export const fetchIt = (_url, callback) => __awaiter(void 0, void 0, void 0, fun
         if (response.ok) {
             // on met le résultat de response.json() dans un table d'objets nommé "data"
             let data = yield response.json();
+            console.log(data);
             // on donne ensuite ce tableau d'objet à la fonction callback
             callback(data);
             // return pour finir l'instruction de la fonction
@@ -47,14 +48,14 @@ export let pkmNameList = [];
  * @param datas prends un paramètre du type Datas ---> interface Datas
  * @returns pkmNameList - Tableau rempli d'objets de type PokemonName
  */
-export function getAllNames(datas) {
+export function getAllNames(data) {
     // console.log(datas);
     // pour chaque élément dans datas
-    for (let data of datas) {
+    for (let datum of data) {
         // crée un objet de type PokemonName
         const pkmNameId = {
-            pokeid: data.id,
-            name: data.name,
+            pokeid: datum.id,
+            name: datum.name,
         };
         // puis on push l'objet dans le tableau pkmNameList
         pkmNameList.push(pkmNameId);

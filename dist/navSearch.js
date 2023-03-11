@@ -9,4 +9,10 @@ nav_submit.addEventListener('click', () => {
         console.log(nav_input.value);
     }
 });
+nav_input.addEventListener('keyup', () => {
+    //TODO: afficher les "name" de chaque pkm qui contient input.value
+    //TODO: create list with all names includes input.value on keyup
+    // REGEX!!!!!!!!!!!!
+    console.log(nav_input.value);
+});
 //# sourceMappingURL=navSearch.js.map

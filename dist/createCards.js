@@ -18,11 +18,8 @@ const app = document.querySelector('#app');
  * @returns
  */
 function constructCards(datas) {
-    // console.log(datas);
     // pour chaque élément dans datas
     for (let pkm of datas) {
-        // TODO: récupérer chacunes des stats de pkm.stats et mettre dans <div><ul><li>STAT</li></ul></div>
-        // console.log(pkm.stats);
         // on crée une div
         let div = document.createElement('div');
         // qui aura la class "card"
@@ -41,6 +38,7 @@ function constructCards(datas) {
             <span class="card-stat">Vit : ${pkm.stats.speed}</span>
         </div>
         `;
+        console.log(pkm.apiTypes[0].name, pkm.apiTypes[1] ? pkm.apiTypes[1].name : "");
         // puis on rajoute chaque div dans la div "app"
         app.append(div);
     }
