@@ -1,16 +1,10 @@
-import {  pkmNameList, PokemonName } from "./request.js";
+import {  pkmNameList, PokemonName, fetchIt, URL_ALL_PKM, Data } from "./request.js";
 import { toNoAccent } from "./Fuctions.js";
 
 // Get nav-input and nav-submit
 const nav_input = document.querySelector('.nav-input')! as HTMLInputElement
 const nav_submit = document.querySelector('.nav-submit') as HTMLButtonElement
 const navbar = document.querySelector('.navbar')! as HTMLElement
-
-//TODO: add search by id 
-/*
-on submit && "onclik" on <li> : get tuple by "name" value -> to get this.pkm  id
-do the request with pkm id
-*/
 
 nav_submit.addEventListener('click', () => {
     submitSearch(pkmNameList, nav_input.value)
@@ -43,7 +37,7 @@ nav_input.addEventListener('keyup', () => {
         }
     })
 
-    createAllLis(ul, allFindedList)
+    createFindedList(ul, allFindedList)
 
     if(nav_input.value === "" && navbar.querySelector('ul')) {
         navbar.querySelector('ul')?.remove()
@@ -68,12 +62,18 @@ function submitSearch<Type extends PokemonName[]>(list : Type, _value : string) 
     for(let obj of list) {
         if(toNoAccent(obj.name.toLowerCase()) === toNoAccent(_value.toLowerCase())) {
         idSearched =  obj.pokeid
+        fetchIt(URL_ALL_PKM, createOneCard, idSearched)
         console.log(idSearched);
         }
  }
 }
 
-function createAllLis(ElementHTML:HTMLUListElement, list : Array<[number, string]>) : void {
+function createOneCard(data: Data[]) : void {
+    console.log(data);
+    
+}
+
+function createFindedList(ElementHTML:HTMLUListElement, list : Array<[number, string]>) : void {
     list.map((e) => {
         // create li list
         let li = document.createElement('li') as HTMLLIElement
@@ -83,6 +83,11 @@ function createAllLis(ElementHTML:HTMLUListElement, list : Array<[number, string
         li.addEventListener('click' , () => {
             if(li.textContent) {
                 submitSearch(pkmNameList, li.textContent)
+
+                if(nav_input.value !== "") {
+                    nav_input.value = ""
+                    navbar.querySelector('ul')?.remove()
+                } 
             }
         })
 

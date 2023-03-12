@@ -18,26 +18,36 @@ export const URL_ALL_PKM = 'https://pokebuildapi.fr/api/v1/pokemon';
  * @param callback ici (data : {}[]) => {}[] ---> les données passées et retournées sont un tableau d'objet ===> JSON
  * @returns
  */
-export const fetchIt = (_url, callback) => __awaiter(void 0, void 0, void 0, function* () {
-    // Pour vérifier que tout se passe bien, on utilise un block "try/catch"
-    try {
-        // response va récupérer les résultats de la requête avec fetch()
-        let response = yield fetch(_url);
-        // if status === 200, ---> tout est ok
-        if (response.ok) {
-            // on met le résultat de response.json() dans un table d'objets nommé "data"
-            let data = yield response.json();
-            console.log(data);
-            // on donne ensuite ce tableau d'objet à la fonction callback
-            callback(data);
-            // return pour finir l'instruction de la fonction
-            return;
+export const fetchIt = (_url, callback, _value) => __awaiter(void 0, void 0, void 0, function* () {
+    if (_value) {
+        try {
+            let response = yield fetch(_url + `/${_value}`);
+            if (response.ok) {
+                let data = yield response.json();
+                callback(data);
+                // return pour finir l'instruction de la fonction
+                return;
+            }
+            throw new Error('Impossible de contacter le Serveur');
         }
-        // Si la réponse est différente du status 200, on crée une nouvelle Erreur
-        throw new Error('Impossible de contacter le Serveur');
+        catch (error) {
+            console.log(error);
+        }
     }
-    catch (error) {
-        console.log(error);
+    else {
+        try {
+            let response = yield fetch(_url);
+            if (response.ok) {
+                let data = yield response.json();
+                callback(data);
+                // return pour finir l'instruction de la fonction
+                return;
+            }
+            throw new Error('Impossible de contacter le Serveur');
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 });
 // on crée le tableau qui va acueillir tous les objets de type pokemonName
