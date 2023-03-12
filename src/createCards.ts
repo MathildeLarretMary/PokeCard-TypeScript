@@ -6,7 +6,7 @@ import { URL_ALL_PKM, fetchIt, Data } from './request.js';
 const app = document.querySelector('#app')! as HTMLDivElement
 
 // ----------------------CLASS CARD--------------------------
-class PokemonCard<Data> {
+class PokemonCard {
     constructor (
         private id:number,
         private name:string,
