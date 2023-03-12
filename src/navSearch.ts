@@ -1,5 +1,6 @@
 import {  pkmNameList, PokemonName, Data, fetchOnePkm, URL_ALL_PKM } from "./request.js";
 import { toNoAccent } from "./Fuctions.js";
+import { PokemonCard } from "./createCards.js";
 
 // Get nav-input and nav-submit
 const nav_input = document.querySelector('.nav-input')! as HTMLInputElement
@@ -63,7 +64,7 @@ nav_input.addEventListener('keyup' , (e) => {
  * @param _value value to be compared on list
  * @returns fetchOnePkm() -> with id find and put on idSearched
  */
-function submitSearch<Type extends PokemonName[]>(list : Type, _value : string) {
+export function submitSearch<Type extends PokemonName[]>(list : Type, _value : string) {
     let idSearched  : number 
 
     for(let obj of list) {
@@ -104,7 +105,9 @@ function createFindedList(ElementHTML:HTMLUListElement, list : Array<[number, st
 
 }
 
-function createOneCard(data: Data) : void {
+export function createOneCard(data: Data) : void {
     console.log(data);
+    let newModale = new PokemonCard(data.id, data.name, data.image, data.sprite, data.apiGeneration, data.stats, data.apiTypes)
+    newModale.createModale()
     return   
 }
