@@ -18,36 +18,41 @@ export const URL_ALL_PKM = 'https://pokebuildapi.fr/api/v1/pokemon';
  * @param callback ici (data : {}[]) => {}[] ---> les données passées et retournées sont un tableau d'objet ===> JSON
  * @returns
  */
-export const fetchIt = (_url, callback, _value) => __awaiter(void 0, void 0, void 0, function* () {
-    if (_value) {
-        try {
-            let response = yield fetch(_url + `/${_value}`);
-            if (response.ok) {
-                let data = yield response.json();
-                callback(data);
-                // return pour finir l'instruction de la fonction
-                return;
-            }
-            throw new Error('Impossible de contacter le Serveur');
+export const fetchAllPkms = (_url, callback) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let response = yield fetch(_url);
+        if (response.ok) {
+            let data = yield response.json();
+            callback(data);
+            // return pour finir l'instruction de la fonction
+            return;
         }
-        catch (error) {
-            console.log(error);
-        }
+        throw new Error('Impossible de contacter le Serveur');
     }
-    else {
-        try {
-            let response = yield fetch(_url);
-            if (response.ok) {
-                let data = yield response.json();
-                callback(data);
-                // return pour finir l'instruction de la fonction
-                return;
-            }
-            throw new Error('Impossible de contacter le Serveur');
+    catch (error) {
+        console.log(error);
+    }
+});
+/**
+ *
+ * @param _url paramètre qui prend l'URL pour la méthodes fetch()
+ * @param callback fonction callback qui va exécuter la fonction sur les éléments récupérés
+ * @param _value élément passé dans param pour recherche plus précise number
+ * @returns
+ */
+export const fetchOnePkm = (_url, callback, _value) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let response = yield fetch(_url + `/${_value}`);
+        if (response.ok) {
+            let data = yield response.json();
+            callback(data);
+            // return pour finir l'instruction de la fonction
+            return;
         }
-        catch (error) {
-            console.log(error);
-        }
+        throw new Error('Impossible de contacter le Serveur');
+    }
+    catch (error) {
+        console.log(error);
     }
 });
 // on crée le tableau qui va acueillir tous les objets de type pokemonName
@@ -74,6 +79,5 @@ export function getAllNames(data) {
     return pkmNameList;
 }
 //----------------------------USE FECTHES FUNCTIONS-------------------------------
-fetchIt(URL_ALL_PKM, getAllNames);
-// getAllPkms(datas : {}[]) ---> callbak: (datas : {}[])
+fetchAllPkms(URL_ALL_PKM, getAllNames);
 //# sourceMappingURL=request.js.map

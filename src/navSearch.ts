@@ -1,4 +1,4 @@
-import {  pkmNameList, PokemonName, fetchIt, URL_ALL_PKM, Data } from "./request.js";
+import {  pkmNameList, PokemonName, Data, fetchOnePkm, URL_ALL_PKM } from "./request.js";
 import { toNoAccent } from "./Fuctions.js";
 
 // Get nav-input and nav-submit
@@ -6,6 +6,7 @@ const nav_input = document.querySelector('.nav-input')! as HTMLInputElement
 const nav_submit = document.querySelector('.nav-submit') as HTMLButtonElement
 const navbar = document.querySelector('.navbar')! as HTMLElement
 
+// ------------------------EVENT LISTENERS----------------------------
 nav_submit.addEventListener('click', () => {
     submitSearch(pkmNameList, nav_input.value)
 
@@ -14,7 +15,6 @@ nav_submit.addEventListener('click', () => {
         navbar.querySelector('ul')?.remove()
     } 
 })
-
 
 nav_input.addEventListener('keyup', () => {
     // create list with all names includes input.value on keyup
@@ -56,23 +56,29 @@ nav_input.addEventListener('keyup' , (e) => {
     }
 })
 
+// ------------------------FUNCTIONS----------------------------
+/**
+ * 
+ * @param list takes list of all pokemons names to compare with value
+ * @param _value value to be compared on list
+ * @returns fetchOnePkm() -> with id find and put on idSearched
+ */
 function submitSearch<Type extends PokemonName[]>(list : Type, _value : string) {
     let idSearched  : number 
 
     for(let obj of list) {
         if(toNoAccent(obj.name.toLowerCase()) === toNoAccent(_value.toLowerCase())) {
         idSearched =  obj.pokeid
-        fetchIt(URL_ALL_PKM, createOneCard, idSearched)
-        console.log(idSearched);
+        fetchOnePkm(URL_ALL_PKM, createOneCard, idSearched)
         }
  }
 }
 
-function createOneCard(data: Data[]) : void {
-    console.log(data);
-    
-}
-
+/**
+ * 
+ * @param ElementHTML takes an HTMLUListElement to append <li> elements  
+ * @param list list of all pokemons to be compared
+ */
 function createFindedList(ElementHTML:HTMLUListElement, list : Array<[number, string]>) : void {
     list.map((e) => {
         // create li list
@@ -96,4 +102,9 @@ function createFindedList(ElementHTML:HTMLUListElement, list : Array<[number, st
 
     navbar.append(ElementHTML)
 
+}
+
+function createOneCard(data: Data) : void {
+    console.log(data);
+    return   
 }

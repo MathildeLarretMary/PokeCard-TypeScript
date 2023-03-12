@@ -1,12 +1,12 @@
 //--------------------------IMPORTS----------------------------
-import { URL_ALL_PKM, fetchIt, Data } from './request.js';
+import { URL_ALL_PKM, fetchAllPkms, Data } from './request.js';
 
 //--------------------------CONSTANTES----------------------------
 // on récupère la div "app" du document HTML
 const app = document.querySelector('#app')! as HTMLDivElement
 
 // ----------------------CLASS CARD--------------------------
-class PokemonCard {
+export class PokemonCard {
     constructor (
         private id:number,
         private name:string,
@@ -58,15 +58,14 @@ class PokemonCard {
  * crée une carte dans le DOM pour chaque élément dans datas
  * @returns 
  */
-function constructCards(data : Data[]) : Data[] {
+export function constructCards(data : Data[]) : Data[] {
     // pour chaque élément dans data
     for(let pkm of data) {
         let newCard = new PokemonCard(pkm.id, pkm.name, pkm.image, pkm.sprite, pkm.apiGeneration, pkm.stats, pkm.apiTypes)
         newCard.createCard()
     }
     return data
-    
 }
 
 //----------------------------USE FECTHES FUNCTIONS-------------------------------
-fetchIt(URL_ALL_PKM, constructCards)
+fetchAllPkms(URL_ALL_PKM, constructCards)

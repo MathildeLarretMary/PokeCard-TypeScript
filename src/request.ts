@@ -12,25 +12,8 @@ export const URL_ALL_PKM:string = 'https://pokebuildapi.fr/api/v1/pokemon'
  * @param callback ici (data : {}[]) => {}[] ---> les données passées et retournées sont un tableau d'objet ===> JSON
  * @returns 
  */
-export const fetchIt = async (_url:string , callback: (datas : Data[]) => {}[] | void, _value?: number) => {
-    if(_value) {
-        try {
-            let response = await fetch(_url + `/${_value}`)
-    
-            if(response.ok) {
-                let data:Data[] = await response.json()
-                
-                callback(data)
-                
-                // return pour finir l'instruction de la fonction
-                return 
-            }
-            throw new Error('Impossible de contacter le Serveur')
-        } catch (error) {
-            console.log(error);
-        }
-        
-    } else {
+export const fetchAllPkms = async (_url:string , callback: (data : Data[]) => {}[] ) => {
+
         try {
             let response = await fetch(_url)
     
@@ -45,6 +28,31 @@ export const fetchIt = async (_url:string , callback: (datas : Data[]) => {}[] |
         } catch (error) {
             console.log(error);
         }
+
+}
+
+/**
+ * 
+ * @param _url paramètre qui prend l'URL pour la méthodes fetch()
+ * @param callback fonction callback qui va exécuter la fonction sur les éléments récupérés
+ * @param _value élément passé dans param pour recherche plus précise number 
+ * @returns 
+ */
+export const fetchOnePkm = async (_url:string , callback: (data : Data) => void, _value:number) => {
+    try {
+        let response = await fetch(_url + `/${_value}`)
+
+        if(response.ok) {
+            let data:Data= await response.json()
+            
+            callback(data)
+            
+            // return pour finir l'instruction de la fonction
+            return 
+        }
+        throw new Error('Impossible de contacter le Serveur')
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -103,8 +111,8 @@ export function getAllNames(data : Data[]) : PokemonName[] {
 }
 
 //----------------------------USE FECTHES FUNCTIONS-------------------------------
-fetchIt(URL_ALL_PKM, getAllNames) 
-// getAllPkms(datas : {}[]) ---> callbak: (datas : {}[])
+fetchAllPkms(URL_ALL_PKM, getAllNames) 
+
 
 
 

@@ -1,9 +1,10 @@
-import { pkmNameList, fetchIt, URL_ALL_PKM } from "./request.js";
+import { pkmNameList, fetchOnePkm, URL_ALL_PKM } from "./request.js";
 import { toNoAccent } from "./Fuctions.js";
 // Get nav-input and nav-submit
 const nav_input = document.querySelector('.nav-input');
 const nav_submit = document.querySelector('.nav-submit');
 const navbar = document.querySelector('.navbar');
+// ------------------------EVENT LISTENERS----------------------------
 nav_submit.addEventListener('click', () => {
     var _a;
     submitSearch(pkmNameList, nav_input.value);
@@ -43,19 +44,27 @@ nav_input.addEventListener('keyup', (e) => {
         }
     }
 });
+// ------------------------FUNCTIONS----------------------------
+/**
+ *
+ * @param list takes list of all pokemons names to compare with value
+ * @param _value value to be compared on list
+ * @returns fetchOnePkm() -> with id find and put on idSearched
+ */
 function submitSearch(list, _value) {
     let idSearched;
     for (let obj of list) {
         if (toNoAccent(obj.name.toLowerCase()) === toNoAccent(_value.toLowerCase())) {
             idSearched = obj.pokeid;
-            fetchIt(URL_ALL_PKM, createOneCard, idSearched);
-            console.log(idSearched);
+            fetchOnePkm(URL_ALL_PKM, createOneCard, idSearched);
         }
     }
 }
-function createOneCard(data) {
-    console.log(data);
-}
+/**
+ *
+ * @param ElementHTML takes an HTMLUListElement to append <li> elements
+ * @param list list of all pokemons to be compared
+ */
 function createFindedList(ElementHTML, list) {
     list.map((e) => {
         // create li list
@@ -75,5 +84,9 @@ function createFindedList(ElementHTML, list) {
         ElementHTML.append(li);
     });
     navbar.append(ElementHTML);
+}
+function createOneCard(data) {
+    console.log(data);
+    return;
 }
 //# sourceMappingURL=navSearch.js.map

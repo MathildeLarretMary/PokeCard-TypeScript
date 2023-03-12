@@ -1,10 +1,10 @@
 //--------------------------IMPORTS----------------------------
-import { URL_ALL_PKM, fetchIt } from './request.js';
+import { URL_ALL_PKM, fetchAllPkms } from './request.js';
 //--------------------------CONSTANTES----------------------------
 // on récupère la div "app" du document HTML
 const app = document.querySelector('#app');
 // ----------------------CLASS CARD--------------------------
-class PokemonCard {
+export class PokemonCard {
     constructor(id, name, image, sprite, apiGeneration, stats, apiTypes) {
         this.id = id;
         this.name = name;
@@ -46,7 +46,7 @@ class PokemonCard {
  * crée une carte dans le DOM pour chaque élément dans datas
  * @returns
  */
-function constructCards(data) {
+export function constructCards(data) {
     // pour chaque élément dans data
     for (let pkm of data) {
         let newCard = new PokemonCard(pkm.id, pkm.name, pkm.image, pkm.sprite, pkm.apiGeneration, pkm.stats, pkm.apiTypes);
@@ -55,5 +55,5 @@ function constructCards(data) {
     return data;
 }
 //----------------------------USE FECTHES FUNCTIONS-------------------------------
-fetchIt(URL_ALL_PKM, constructCards);
+fetchAllPkms(URL_ALL_PKM, constructCards);
 //# sourceMappingURL=createCards.js.map
