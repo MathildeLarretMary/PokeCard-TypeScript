@@ -22,7 +22,8 @@ export class PokemonCard {
             special_defense:number,
             speed:number
         },
-        private apiTypes: [{name:string}, {name?:string}]
+        private apiTypes: [{name:string}, {name?:string}],
+        private apiResistances: [{[props:string] : string | number}]
     ) {}
 
     createCard() {
@@ -61,10 +62,18 @@ export class PokemonCard {
         let div = document.createElement('div') as HTMLDivElement
         let divApp = document.createElement('div') as HTMLDivElement
         let closeBtn = document.createElement('button')! as HTMLButtonElement
+        let divResists = document.createElement('div')! as HTMLDivElement
+        let divCardStats = document.createElement('div')! as HTMLDivElement
 
         divApp.classList.add('modale')
+        divResists.classList.add('card','card-modale', 'resist-card')
+        divCardStats.classList.add('card-stats-restist')
+
+        divResists.append(divCardStats)
+
         div.classList.add('card')
         div.classList.add('card-modale')
+
         closeBtn.classList.add('close-modale')
         closeBtn.textContent = "X"
 
@@ -81,6 +90,15 @@ export class PokemonCard {
             <span class="card-stat">Vit : ${this.stats.speed}</span>
         </div>
         `;
+
+        this.apiResistances.forEach((element) => {
+            console.log(element);
+            let newStat = document.createElement('span')! as HTMLSpanElement
+            newStat.classList.add('card-stat-resist')
+            newStat.innerHTML = `${element.name} : <span class="${element.damage_relation}">x${element.damage_multiplier}</span>`
+            
+            divCardStats.append(newStat)
+        })
         //console.log(pkm.apiTypes[0].name, pkm.apiTypes[1] ? pkm.apiTypes[1].name : "");
         
         closeBtn.addEventListener('click', () => {
@@ -89,6 +107,7 @@ export class PokemonCard {
         // puis on rajoute chaque div dans la div "app"
         divApp.append(closeBtn)
         divApp.append(div)
+        divApp.append(divResists)
         app.append(divApp)
     }
 
@@ -106,7 +125,7 @@ export class PokemonCard {
 export function constructCards(data : Data[]) : Data[] {
     // pour chaque élément dans data
     for(let pkm of data) {
-        let newCard = new PokemonCard(pkm.id, pkm.name, pkm.image, pkm.sprite, pkm.apiGeneration, pkm.stats, pkm.apiTypes)
+        let newCard = new PokemonCard(pkm.id, pkm.name, pkm.image, pkm.sprite, pkm.apiGeneration, pkm.stats, pkm.apiTypes, pkm.apiResistances)
         newCard.createCard()
     }
     return data

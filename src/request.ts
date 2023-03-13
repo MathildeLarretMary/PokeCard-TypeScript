@@ -40,7 +40,7 @@ export const fetchAllPkms = async (_url:string , callback: (data : Data[]) => {}
  */
 export const fetchOnePkm = async (_url:string , callback: (data : Data) => void, _value:number) => {
     try {
-        let response = await fetch(_url + `/${_value}`)
+        let response = await fetch(_url + `/${_value}`) 
 
         if(response.ok) {
             let data:Data= await response.json()
@@ -73,7 +73,8 @@ export interface Data {
         special_defense:number,
         speed:number
     },
-    apiTypes: [{name:string}, {name?:string}]
+    apiTypes: [{name:string}, {name?:string}],
+    apiResistances: [{[props:string] : string | number}]
 }
 
 // Interface de ce qu'on souhaite avoir au final ---> on crée donc un nouveau type

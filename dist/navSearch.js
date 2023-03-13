@@ -88,7 +88,7 @@ function createFindedList(ElementHTML, list) {
 }
 export function createOneCard(data) {
     console.log(data);
-    let newModale = new PokemonCard(data.id, data.name, data.image, data.sprite, data.apiGeneration, data.stats, data.apiTypes);
+    let newModale = new PokemonCard(data.id, data.name, data.image, data.sprite, data.apiGeneration, data.stats, data.apiTypes, data.apiResistances);
     newModale.createModale();
     return;
 }

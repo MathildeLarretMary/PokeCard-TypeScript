@@ -6,7 +6,7 @@ import { URL_ALL_PKM, fetchAllPkms, fetchOnePkm } from './request.js';
 const app = document.querySelector('#app');
 // ----------------------CLASS CARD--------------------------
 export class PokemonCard {
-    constructor(id, name, image, sprite, apiGeneration, stats, apiTypes) {
+    constructor(id, name, image, sprite, apiGeneration, stats, apiTypes, apiResistances) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -14,6 +14,7 @@ export class PokemonCard {
         this.apiGeneration = apiGeneration;
         this.stats = stats;
         this.apiTypes = apiTypes;
+        this.apiResistances = apiResistances;
     }
     createCard() {
         // on crée une div
@@ -47,7 +48,12 @@ export class PokemonCard {
         let div = document.createElement('div');
         let divApp = document.createElement('div');
         let closeBtn = document.createElement('button');
+        let divResists = document.createElement('div');
+        let divCardStats = document.createElement('div');
         divApp.classList.add('modale');
+        divResists.classList.add('card', 'card-modale', 'resist-card');
+        divCardStats.classList.add('card-stats-restist');
+        divResists.append(divCardStats);
         div.classList.add('card');
         div.classList.add('card-modale');
         closeBtn.classList.add('close-modale');
@@ -65,6 +71,13 @@ export class PokemonCard {
             <span class="card-stat">Vit : ${this.stats.speed}</span>
         </div>
         `;
+        this.apiResistances.forEach((element) => {
+            console.log(element);
+            let newStat = document.createElement('span');
+            newStat.classList.add('card-stat-resist');
+            newStat.innerHTML = `${element.name} : <span class="${element.damage_relation}">x${element.damage_multiplier}</span>`;
+            divCardStats.append(newStat);
+        });
         //console.log(pkm.apiTypes[0].name, pkm.apiTypes[1] ? pkm.apiTypes[1].name : "");
         closeBtn.addEventListener('click', () => {
             app.removeChild(divApp);
@@ -72,6 +85,7 @@ export class PokemonCard {
         // puis on rajoute chaque div dans la div "app"
         divApp.append(closeBtn);
         divApp.append(div);
+        divApp.append(divResists);
         app.append(divApp);
     }
     get getId() { return this.id; }
@@ -87,7 +101,7 @@ export class PokemonCard {
 export function constructCards(data) {
     // pour chaque élément dans data
     for (let pkm of data) {
-        let newCard = new PokemonCard(pkm.id, pkm.name, pkm.image, pkm.sprite, pkm.apiGeneration, pkm.stats, pkm.apiTypes);
+        let newCard = new PokemonCard(pkm.id, pkm.name, pkm.image, pkm.sprite, pkm.apiGeneration, pkm.stats, pkm.apiTypes, pkm.apiResistances);
         newCard.createCard();
     }
     return data;
