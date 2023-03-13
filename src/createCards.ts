@@ -92,7 +92,6 @@ export class PokemonCard {
         `;
 
         this.apiResistances.forEach((element) => {
-            console.log(element);
             let newStat = document.createElement('span')! as HTMLSpanElement
             newStat.classList.add('card-stat-resist')
             newStat.innerHTML = `${element.name} : <span class="${element.damage_relation}">x${element.damage_multiplier}</span>`

@@ -2,6 +2,7 @@
 :root {
     --orange-color : #ff9c6d;
     --red-color : #fd5959;
+    --dark-red-color: #d40000;
     --yellow-color : #fcff82;
     --light-yellow-color : #feffba;
 }
@@ -24,7 +25,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    background-color: var(--red-color);
+    background-color: var(--dark-red-color);
     border-radius: 0 0 30px 30px;
     box-shadow: 3px 8px 7px 2px rgba(0,0,0,0.5);
 }
@@ -46,6 +47,7 @@ body {
 }
 
 .nav-input {
+    position: relative;
     border-radius: 30px 0 0 30px;
     padding-left: 10px;
 }
@@ -57,6 +59,25 @@ body {
     padding-left: 20px;
 }
 
+.list-finded {
+    width: 180px;
+    position: absolute;
+    z-index: 1;
+
+    background-color: var(--yellow-color);
+    border: var(--red-color) 3px solid;
+    border-radius: 20px;
+}
+
+.list-finded > li {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: var(--red-color);
+    border: var(--dark-red-color) 3px solid;
+    color: var(--light-yellow-color);
+    padding: 5px 0 2px 15px;
+    margin: 5px ;
+    border-radius: 20px;
+}
 /*-------------------------APP----------------------------*/
 
 .app {
@@ -74,7 +95,7 @@ body {
     position: relative;
     background-color: var(--yellow-color);
     border-radius: 20px;
-    border: var(--red-color) 4px solid;
+    border: var(--dark-red-color) 4px solid;
     min-width: 250px;
     height: 350px;
     /*TODO: change on @media-queries */
@@ -90,11 +111,10 @@ body {
 .card {
     max-width: 250px;
 }
-/*  */
 
 .card-img {
     background-color: var(--orange-color);
-    border: var(--red-color) 3px solid;
+    border: var(--dark-red-color) 3px solid;
     border-radius: 20px;
     margin: 10px auto 5px;
     width: 90%;
@@ -104,8 +124,9 @@ body {
 
 .card-name {
    text-transform: capitalize;
+   color: var(--light-yellow-color);
     font-weight: 700;
-    background-color: var(--red-color);
+    background-color: var(--dark-red-color);
     border-radius: 30px;
     padding: 3px 5px 5px 5px;
     margin: 5px 5px 5px 10px;
@@ -147,8 +168,8 @@ body {
 
 .more {
     background-color: var(--light-yellow-color);
-    color: var(--red-color);
-    border: var(--red-color) solid 2px;
+    color: var(--dark-red-color);
+    border: var(--dark-red-color) solid 2px;
     position: absolute;
     right: 0;
     height: 30px;
@@ -189,8 +210,8 @@ body {
     width: 30px;
     border-radius: 30px;
 
-    background-color: var(--red-color);
-    color: white;
+    background-color: var(--dark-red-color);
+    color: var(--light-yellow-color);
     font-weight: bold;
     border: none;
 
