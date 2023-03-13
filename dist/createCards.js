@@ -1,4 +1,6 @@
-import { URL_ALL_PKM, fetchAllPkms } from './request.js';
+//--------------------------IMPORTS----------------------------
+import { createOneCard } from './navSearch.js';
+import { URL_ALL_PKM, fetchAllPkms, fetchOnePkm } from './request.js';
 //--------------------------CONSTANTES----------------------------
 // on récupère la div "app" du document HTML
 const app = document.querySelector('#app');
@@ -23,7 +25,7 @@ export class PokemonCard {
         <h2 class="card-gen">Gen : ${this.apiGeneration}</h2>
         <img src="${this.sprite}" class="card-img">
         <span class="card-name">${this.name}</span>
-        <button class="more">+</button>
+        <button value = "${this.id}" class="more">+</button>
         <div class="card-stats">
             <span class="card-stat">HP : ${this.stats.HP}</span>
             <span class="card-stat">Att : ${this.stats.attack}</span>
@@ -33,13 +35,12 @@ export class PokemonCard {
             <span class="card-stat">Vit : ${this.stats.speed}</span>
         </div>
         `;
-        //console.log(pkm.apiTypes[0].name, pkm.apiTypes[1] ? pkm.apiTypes[1].name : "");
-        // let moreBtn = document.querySelector('.more')! as HTMLButtonElement
-        // moreBtn?.addEventListener('click', () => {
-        //     //ça fait beaucoup là non?
-        //     // fetchOnePkm(URL_ALL_PKM, createOneCard, this.id)
-        // })
-        // puis on rajoute chaque div dans la div "app"
+        let moreInfoBtn = div.querySelector('button');
+        moreInfoBtn.onclick = function () {
+            fetchOnePkm(URL_ALL_PKM, createOneCard, +moreInfoBtn.value);
+        };
+        // //console.log(pkm.apiTypes[0].name, pkm.apiTypes[1] ? pkm.apiTypes[1].name : "");
+        // // puis on rajoute chaque div dans la div "app"
         app.append(div);
     }
     createModale() {
@@ -73,6 +74,7 @@ export class PokemonCard {
         divApp.append(div);
         app.append(divApp);
     }
+    get getId() { return this.id; }
 }
 //----------------------------FONCTIONS CALLBACK-------------------------------
 /**
