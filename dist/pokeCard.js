@@ -12,7 +12,7 @@ class PokeCard extends HTMLElement {
             background-color: var(--light-medium-color);
             border-radius: 20px;
             border: var(--dark-color) 4px solid;
-            min-width: 250px;
+            width: 250px;
             height: 350px;
             /*TODO: change on @media-queries */
             margin: 15px 0;
@@ -82,7 +82,7 @@ class PokeCard extends HTMLElement {
             padding: 4px 10px 0;
         }
         
-        .more {
+        ::slotted(button) {
             background-color: var(--light-color);
             color: var(--dark-color);
             border: var(--dark-color) solid 2px;
@@ -102,16 +102,15 @@ class PokeCard extends HTMLElement {
         const _data_generation = this.getAttribute('data-generation');
         const _data_sprite = this.getAttribute('data-sprite');
         const _data_name = this.getAttribute('data-name');
-        const _data_id = this.getAttribute('data-id');
         const _data_stat_hp = this.getAttribute('data-stat-hp');
         const _data_stat_att = this.getAttribute('data-stat-att');
         const _data_stat_def = this.getAttribute('data-stat-def');
         const _data_stat_att_spe = this.getAttribute('data-stat-att-spe');
         const _data_stat_def_spe = this.getAttribute('data-stat-def-spe');
         const _data_stat_speed = this.getAttribute('data-stat-speed');
-        this.buildDOM(_data_generation, _data_sprite, _data_name, _data_id, _data_stat_hp, _data_stat_att, _data_stat_def, _data_stat_att_spe, _data_stat_def_spe, _data_stat_speed);
+        this.buildDOM(_data_generation, _data_sprite, _data_name, _data_stat_hp, _data_stat_att, _data_stat_def, _data_stat_att_spe, _data_stat_def_spe, _data_stat_speed);
     }
-    buildDOM(gen, sprite, name, id, stat_hp, stat_att, stat_def, stat_att_spe, stat_def_spe, stat_speed) {
+    buildDOM(gen, sprite, name, stat_hp, stat_att, stat_def, stat_att_spe, stat_def_spe, stat_speed) {
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('card');
         const title = document.createElement('h2'); // _data_name
@@ -126,11 +125,13 @@ class PokeCard extends HTMLElement {
         image.classList.add('card-img');
         image.src = sprite;
         cardDiv.append(image);
-        const moreBtn = document.createElement('button'); // _data_id
-        moreBtn.classList.add('more');
-        moreBtn.value = id;
-        moreBtn.textContent = '+';
-        cardDiv.append(moreBtn);
+        const slotMoreBtn = document.createElement('slot'); // _data_id
+        slotMoreBtn.name = "slot-more-btn";
+        // slotMoreBtn.classList.add('more')
+        cardDiv.append(slotMoreBtn);
+        const slotModale = document.createElement('slot'); // _data_id
+        slotModale.name = "slot-modale";
+        cardDiv.append(slotModale);
         // stats--------------------------------------------------------------------------
         const stats = document.createElement('div');
         stats.classList.add('card-stats');
@@ -170,13 +171,19 @@ function addPokeCard(data) {
         pokeCard.setAttribute('data-name', pkm.name);
         pokeCard.setAttribute('data-sprite', pkm.sprite);
         pokeCard.setAttribute('data-generation', pkm.apiGeneration.toString());
-        pokeCard.setAttribute('data-id', pkm.id.toString());
         pokeCard.setAttribute('data-stat-hp', pkm.stats.HP.toString());
         pokeCard.setAttribute('data-stat-att', pkm.stats.attack.toString());
         pokeCard.setAttribute('data-stat-def', pkm.stats.defense.toString());
         pokeCard.setAttribute('data-stat-att-spe', pkm.stats.special_attack.toString());
         pokeCard.setAttribute('data-stat-def-spe', pkm.stats.special_defense.toString());
         pokeCard.setAttribute('data-stat-speed', pkm.stats.speed.toString());
+        let moreBtn = document.createElement('button');
+        moreBtn.setAttribute('slot', 'slot-more-btn');
+        moreBtn.addEventListener('click', () => {
+            console.log(pkm.id + ' //TODO: encode createModale()');
+        });
+        moreBtn.textContent = '+';
+        pokeCard.append(moreBtn);
         App === null || App === void 0 ? void 0 : App.append(pokeCard);
     }
     return data;

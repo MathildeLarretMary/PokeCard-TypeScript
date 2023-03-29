@@ -1,4 +1,4 @@
-import { URL_ALL_PKM, fetchAllPkms, Data } from "./request.js"
+import { URL_ALL_PKM, fetchAllPkms, Data, fetchOnePkm } from "./request.js"
 
 class PokeCard extends HTMLElement {
     constructor(
@@ -14,7 +14,7 @@ class PokeCard extends HTMLElement {
             background-color: var(--light-medium-color);
             border-radius: 20px;
             border: var(--dark-color) 4px solid;
-            min-width: 250px;
+            width: 250px;
             height: 350px;
             /*TODO: change on @media-queries */
             margin: 15px 0;
@@ -84,7 +84,7 @@ class PokeCard extends HTMLElement {
             padding: 4px 10px 0;
         }
         
-        .more {
+        ::slotted(button) {
             background-color: var(--light-color);
             color: var(--dark-color);
             border: var(--dark-color) solid 2px;
@@ -105,7 +105,6 @@ class PokeCard extends HTMLElement {
         const _data_generation  = this.getAttribute('data-generation')!
         const _data_sprite = this.getAttribute('data-sprite')!
         const _data_name = this.getAttribute('data-name')!
-        const _data_id = this.getAttribute('data-id')!
 
         const _data_stat_hp = this.getAttribute('data-stat-hp')!
         const _data_stat_att = this.getAttribute('data-stat-att')!
@@ -119,7 +118,6 @@ class PokeCard extends HTMLElement {
             _data_generation,
             _data_sprite,
             _data_name,
-            _data_id,
             _data_stat_hp,
             _data_stat_att,
             _data_stat_def,
@@ -133,7 +131,6 @@ class PokeCard extends HTMLElement {
         gen : string,
         sprite: string,
         name: string,
-        id: string,
         stat_hp: string,
         stat_att: string,
         stat_def: string,
@@ -156,11 +153,13 @@ class PokeCard extends HTMLElement {
         image.classList.add('card-img')
         image.src = sprite
         cardDiv.append(image)
-        const moreBtn = document.createElement('button')! as HTMLButtonElement // _data_id
-        moreBtn.classList.add('more')
-        moreBtn.value = id
-        moreBtn.textContent = '+'
-        cardDiv.append(moreBtn)
+        const slotMoreBtn = document.createElement('slot')! as HTMLSlotElement // _data_id
+        slotMoreBtn.name = "slot-more-btn"
+        // slotMoreBtn.classList.add('more')
+        cardDiv.append(slotMoreBtn)
+        const slotModale = document.createElement('slot')! as HTMLSlotElement // _data_id
+            slotModale.name = "slot-modale"
+        cardDiv.append(slotModale)
 
         // stats--------------------------------------------------------------------------
         const stats = document.createElement('div')! as HTMLDivElement
@@ -206,13 +205,21 @@ function addPokeCard(data:Data[]) : Data[] {
         pokeCard.setAttribute('data-name', pkm.name)
         pokeCard.setAttribute('data-sprite', pkm.sprite)
         pokeCard.setAttribute('data-generation', pkm.apiGeneration.toString())
-        pokeCard.setAttribute('data-id', pkm.id.toString())
         pokeCard.setAttribute('data-stat-hp', pkm.stats.HP.toString())
         pokeCard.setAttribute('data-stat-att', pkm.stats.attack.toString())
         pokeCard.setAttribute('data-stat-def', pkm.stats.defense.toString())
         pokeCard.setAttribute('data-stat-att-spe', pkm.stats.special_attack.toString())
         pokeCard.setAttribute('data-stat-def-spe', pkm.stats.special_defense.toString())
-        pokeCard.setAttribute('data-stat-speed', pkm.stats.speed.toString())       
+        pokeCard.setAttribute('data-stat-speed', pkm.stats.speed.toString()) 
+        
+        let moreBtn = document.createElement('button')! as HTMLButtonElement
+        moreBtn.setAttribute('slot', 'slot-more-btn')
+        moreBtn.addEventListener('click', () => {
+            console.log(pkm.id + ' //TODO: encode createModale()');
+        })
+        moreBtn.textContent = '+'
+        pokeCard.append(moreBtn)
+
         App?.append(pokeCard)
     }
     return data
