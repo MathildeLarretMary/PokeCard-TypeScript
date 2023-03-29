@@ -1,10 +1,10 @@
 
 :root {
-    --orange-color : #ff9c6d;
-    --red-color : #fd5959;
-    --dark-red-color: #d40000;
-    --yellow-color : #fcff82;
-    --light-yellow-color : #feffba;
+    --medium-color : #ff9c6d;
+    --dark-medium-color : #fd5959;
+    --dark-color: #d40000;
+    --light-medium-color : #fcff82;
+    --light-color : #feffba;
 }
 
 
@@ -13,7 +13,7 @@ html::-webkit-scrollbar {
 }
 
 body {
-    background-color: var(--light-yellow-color);
+    background-color: var(--light-color);
 }
 
 /*-------------------------HEADER----------------------------*/
@@ -25,7 +25,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    background-color: var(--dark-red-color);
+    background-color: var(--dark-color);
     border-radius: 0 0 30px 30px;
     box-shadow: 3px 8px 7px 2px rgba(0,0,0,0.5);
 }
@@ -37,13 +37,13 @@ body {
 .title {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 2em;
-    color: var(--light-yellow-color);
+    color: var(--light-color);
 }
 
 .nav-input, .nav-submit {
     min-height: 35px;
     border: none;
-    background-color: var(--yellow-color)
+    background-color: var(--light-medium-color)
 }
 
 .nav-input {
@@ -53,7 +53,7 @@ body {
 }
 
 .nav-submit {
-    border-left: var(--red-color) 2px ridge;
+    border-left: var(--dark-medium-color) 2px ridge;
     border-radius: 0 30px 30px 0;
     padding-right: 20px;
     padding-left: 20px;
@@ -64,16 +64,16 @@ body {
     position: absolute;
     z-index: 1;
 
-    background-color: var(--yellow-color);
-    border: var(--red-color) 3px solid;
+    background-color: var(--light-medium-color);
+    border: var(--dark-medium-color) 3px solid;
     border-radius: 20px;
 }
 
 .list-finded > li {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    background-color: var(--red-color);
-    border: var(--dark-red-color) 3px solid;
-    color: var(--light-yellow-color);
+    background-color: var(--dark-medium-color);
+    border: var(--dark-color) 3px solid;
+    color: var(--light-color);
     padding: 5px 0 2px 15px;
     margin: 5px ;
     border-radius: 20px;
@@ -90,12 +90,12 @@ body {
     justify-content: space-around;
 }
 
-.card, .resist-card {
+/* .card, .resist-card {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     position: relative;
-    background-color: var(--yellow-color);
+    background-color: var(--light-medium-color);
     border-radius: 20px;
-    border: var(--dark-red-color) 4px solid;
+    border: var(--dark-color) 4px solid;
     min-width: 250px;
     height: 350px;
     /*TODO: change on @media-queries */
@@ -113,8 +113,8 @@ body {
 }
 
 .card-img {
-    background-color: var(--orange-color);
-    border: var(--dark-red-color) 3px solid;
+    background-color: var(--medium-color);
+    border: var(--dark-color) 3px solid;
     border-radius: 20px;
     margin: 10px auto 5px;
     width: 90%;
@@ -124,9 +124,9 @@ body {
 
 .card-name {
    text-transform: capitalize;
-   color: var(--light-yellow-color);
+   color: var(--light-color);
     font-weight: 700;
-    background-color: var(--dark-red-color);
+    background-color: var(--dark-color);
     border-radius: 30px;
     padding: 3px 5px 5px 5px;
     margin: 5px 5px 5px 10px;
@@ -137,7 +137,7 @@ body {
 .card-gen {
     font-weight: 300;
     font-size: smaller;
-    background-color: var(--red-color);
+    background-color: var(--dark-medium-color);
     position: absolute;
     padding: 3px 7px 3px 5px;
     margin: 0 10px 8px;
@@ -147,8 +147,8 @@ body {
 }
 
 .card-stats {
-    background-color: var(--orange-color);
-    border: var(--red-color) 3px solid;
+    background-color: var(--medium-color);
+    border: var(--dark-medium-color) 3px solid;
     border-radius: 20px;
     margin: 5px auto 10px;
     width: 90%;
@@ -159,7 +159,7 @@ body {
 }
 
 .card-stat {
-    background-color: var(--red-color);
+    background-color: var(--dark-medium-color);
     border-radius: 20px;
     width: 90%;
     margin: 2px auto;
@@ -167,9 +167,9 @@ body {
 }
 
 .more {
-    background-color: var(--light-yellow-color);
-    color: var(--dark-red-color);
-    border: var(--dark-red-color) solid 2px;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    border: var(--dark-color) solid 2px;
     position: absolute;
     right: 0;
     height: 30px;
@@ -178,7 +178,7 @@ body {
     border-radius: 30px;
     font-weight: bolder;
     font-size: large;
-}
+} */
 
 /*-------------------------MODALE----------------------------*/
 
@@ -195,7 +195,7 @@ body {
     display: flex;
     flex-direction: column;
 
-    background-color: var(--light-yellow-color);
+    background-color: var(--light-color);
 }
 
 .card-modale {
@@ -210,8 +210,8 @@ body {
     width: 30px;
     border-radius: 30px;
 
-    background-color: var(--dark-red-color);
-    color: var(--light-yellow-color);
+    background-color: var(--dark-color);
+    color: var(--light-color);
     font-weight: bold;
     border: none;
 
@@ -222,8 +222,8 @@ body {
 
 .card-stats-restist {
     font-size: 0.8em;
-    background-color: var(--orange-color);
-    border: var(--red-color) 3px solid;
+    background-color: var(--medium-color);
+    border: var(--dark-medium-color) 3px solid;
     border-radius: 20px;
     margin: 2px auto;
     width: 90%;
@@ -233,7 +233,7 @@ body {
 }
 
 .card-stat-resist {
-    background-color: var(--red-color);
+    background-color: var(--dark-medium-color);
     border-radius: 20px;
     width: 48%;
     font-size: smaller;
