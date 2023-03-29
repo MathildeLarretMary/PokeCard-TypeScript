@@ -1,6 +1,7 @@
-import {  pkmNameList, PokemonName, Data, fetchOnePkm, URL_ALL_PKM } from "./request.js";
+import {  pkmNameList, PokemonName,fetchOnePkm, URL_ALL_PKM } from "./request.js";
 import { toNoAccent } from "./Fuctions.js";
-import { PokemonCard } from "./createCards.js";
+// import { PokemonCard } from "./createCards.js";
+import { createModale } from "./pokeCard.js";
 
 // Get nav-input and nav-submit
 const nav_input = document.querySelector('.nav-input')! as HTMLInputElement
@@ -70,7 +71,7 @@ export function submitSearch<Type extends PokemonName[]>(list : Type, _value : s
     for(let obj of list) {
         if(toNoAccent(obj.name.toLowerCase()) === toNoAccent(_value.toLowerCase())) {
         idSearched =  obj.pokeid
-        fetchOnePkm(URL_ALL_PKM, createOneCard, idSearched)
+        fetchOnePkm(URL_ALL_PKM, createModale, idSearched)
         }
  }
 }
@@ -105,9 +106,9 @@ function createFindedList(ElementHTML:HTMLUListElement, list : Array<[number, st
 
 }
 
-export function createOneCard(data: Data) : void {
-    console.log(data);
-    let newModale = new PokemonCard(data.id, data.name, data.image, data.sprite, data.apiGeneration, data.stats, data.apiTypes, data.apiResistances)
-    newModale.createModale()
-    return   
-}
+// export function createOneCard(data: Data) : void {
+//     console.log(data);
+//     let newModale = new PokemonCard(data.id, data.name, data.image, data.sprite, data.apiGeneration, data.stats, data.apiTypes, data.apiResistances)
+//     newModale.createModale()
+//     return   
+// }

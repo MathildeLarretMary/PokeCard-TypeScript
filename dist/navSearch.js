@@ -1,6 +1,7 @@
 import { pkmNameList, fetchOnePkm, URL_ALL_PKM } from "./request.js";
 import { toNoAccent } from "./Fuctions.js";
-import { PokemonCard } from "./createCards.js";
+// import { PokemonCard } from "./createCards.js";
+import { createModale } from "./pokeCard.js";
 // Get nav-input and nav-submit
 const nav_input = document.querySelector('.nav-input');
 const nav_submit = document.querySelector('.nav-submit');
@@ -57,7 +58,7 @@ export function submitSearch(list, _value) {
     for (let obj of list) {
         if (toNoAccent(obj.name.toLowerCase()) === toNoAccent(_value.toLowerCase())) {
             idSearched = obj.pokeid;
-            fetchOnePkm(URL_ALL_PKM, createOneCard, idSearched);
+            fetchOnePkm(URL_ALL_PKM, createModale, idSearched);
         }
     }
 }
@@ -86,10 +87,10 @@ function createFindedList(ElementHTML, list) {
     });
     navbar.append(ElementHTML);
 }
-export function createOneCard(data) {
-    console.log(data);
-    let newModale = new PokemonCard(data.id, data.name, data.image, data.sprite, data.apiGeneration, data.stats, data.apiTypes, data.apiResistances);
-    newModale.createModale();
-    return;
-}
+// export function createOneCard(data: Data) : void {
+//     console.log(data);
+//     let newModale = new PokemonCard(data.id, data.name, data.image, data.sprite, data.apiGeneration, data.stats, data.apiTypes, data.apiResistances)
+//     newModale.createModale()
+//     return   
+// }
 //# sourceMappingURL=navSearch.js.map

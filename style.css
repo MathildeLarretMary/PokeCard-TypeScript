@@ -20,6 +20,7 @@ body {
 
 .header {
     /* position: fixed; */
+    z-index: 3;
     min-height: 90px;
     padding: 15px 0;
     display: flex;
@@ -81,6 +82,7 @@ body {
 /*-------------------------APP----------------------------*/
 
 .app {
+    z-index: 3;
     height: 100vh;
     /*TODO: change on @media-queries */
     width: 100%;
@@ -89,96 +91,6 @@ body {
     flex-wrap: wrap;
     justify-content: space-around;
 }
-
-/* .card, .resist-card {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    position: relative;
-    background-color: var(--light-medium-color);
-    border-radius: 20px;
-    border: var(--dark-color) 4px solid;
-    min-width: 250px;
-    height: 350px;
-    /*TODO: change on @media-queries */
-    margin: 15px 0;
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-
-    box-shadow: 3px 8px 7px 2px rgba(0,0,0,0.5);
-}
-
-.card {
-    max-width: 250px;
-}
-
-.card-img {
-    background-color: var(--medium-color);
-    border: var(--dark-color) 3px solid;
-    border-radius: 20px;
-    margin: 10px auto 5px;
-    width: 90%;
-    height: 40%;
-    object-fit: contain;
-}
-
-.card-name {
-   text-transform: capitalize;
-   color: var(--light-color);
-    font-weight: 700;
-    background-color: var(--dark-color);
-    border-radius: 30px;
-    padding: 3px 5px 5px 5px;
-    margin: 5px 5px 5px 10px;
-    position: absolute;
-    left: 0;
-}
-
-.card-gen {
-    font-weight: 300;
-    font-size: smaller;
-    background-color: var(--dark-medium-color);
-    position: absolute;
-    padding: 3px 7px 3px 5px;
-    margin: 0 10px 8px;
-    border-radius: 10px;
-    bottom: 57%;
-    right: 10px;
-}
-
-.card-stats {
-    background-color: var(--medium-color);
-    border: var(--dark-medium-color) 3px solid;
-    border-radius: 20px;
-    margin: 5px auto 10px;
-    width: 90%;
-    min-height: 50%;
-
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.card-stat {
-    background-color: var(--dark-medium-color);
-    border-radius: 20px;
-    width: 90%;
-    margin: 2px auto;
-    padding: 4px 10px 0;
-}
-
-.more {
-    background-color: var(--light-color);
-    color: var(--dark-color);
-    border: var(--dark-color) solid 2px;
-    position: absolute;
-    right: 0;
-    height: 30px;
-    width: 30px;
-    padding: 1px 1px 0 0;
-    border-radius: 30px;
-    font-weight: bolder;
-    font-size: large;
-} */
 
 /*-------------------------MODALE----------------------------*/
 
