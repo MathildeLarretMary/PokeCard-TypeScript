@@ -1,7 +1,6 @@
 import { pkmNameList, fetchOnePkm, URL_ALL_PKM } from "./request.js";
 import { toNoAccent } from "./Fuctions.js";
-// import { PokemonCard } from "./createCards.js";
-import { createModale } from "./pokeCard.js";
+import { createModale } from "./Fuctions.js";
 // Get nav-input and nav-submit
 const nav_input = document.querySelector('.nav-input');
 const nav_submit = document.querySelector('.nav-submit');
