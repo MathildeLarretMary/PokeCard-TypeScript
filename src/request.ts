@@ -56,6 +56,47 @@ export const fetchOnePkm = async (_url:string , callback: (data : Data) => void,
     }
 }
 
+export async function fetchPkmBy(element:string|number, _url:string, callback : (data: Data) => void) {
+    if(typeof(element)==='number') {
+        console.log('by gen');
+        try {
+            let response = await fetch(_url + `/generation/${element}`)
+
+            if(response.ok) {
+                let data:Data = await response.json()
+
+                callback(data)
+                
+                return
+            }
+            throw new Error('Impossible de contacter le serveur fetchBy')
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
+    } else if (typeof(element)==='string') {
+        console.log('by type');
+        try {
+            let response = await fetch(_url + `/type/${element}`)
+
+            if(response.ok) {
+                let data:Data = await response.json()
+
+                callback(data)
+                
+                return
+            }
+            throw new Error('Impossible de contacter le serveur fetchBy')
+            
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+    
+}
+
 //----------------------------DEFINITIONS-------------------------------
 // On crée le type de ce que l'on reçois 
 // (ex: dans les paramètres d'une fonction)

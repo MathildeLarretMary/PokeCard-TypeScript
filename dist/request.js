@@ -55,6 +55,40 @@ export const fetchOnePkm = (_url, callback, _value) => __awaiter(void 0, void 0,
         console.log(error);
     }
 });
+export function fetchPkmBy(element, _url, callback) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (typeof (element) === 'number') {
+            console.log('by gen');
+            try {
+                let response = yield fetch(_url + `/generation/${element}`);
+                if (response.ok) {
+                    let data = yield response.json();
+                    callback(data);
+                    return;
+                }
+                throw new Error('Impossible de contacter le serveur fetchBy');
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+        else if (typeof (element) === 'string') {
+            console.log('by type');
+            try {
+                let response = yield fetch(_url + `/type/${element}`);
+                if (response.ok) {
+                    let data = yield response.json();
+                    callback(data);
+                    return;
+                }
+                throw new Error('Impossible de contacter le serveur fetchBy');
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }
+    });
+}
 // on crée le tableau qui va acueillir tous les objets de type pokemonName
 export let pkmNameList = [];
 //----------------------------FONCTIONS CALLBACK-------------------------------

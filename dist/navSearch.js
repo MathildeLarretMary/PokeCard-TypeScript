@@ -1,4 +1,4 @@
-import { pkmNameList, fetchOnePkm, URL_ALL_PKM } from "./request.js";
+import { pkmNameList, fetchOnePkm, URL_ALL_PKM, fetchPkmBy } from "./request.js";
 import { toNoAccent } from "./Fuctions.js";
 import { createModale } from "./Fuctions.js";
 // Get nav-input and nav-submit
@@ -72,9 +72,13 @@ nav_search_by.addEventListener('click', () => {
         input.name = "gen-" + element;
         input.id = element.toString();
         input.addEventListener('change', () => {
-            console.log(element);
-            // TODO: if(array !contains) {add} else {remove}
-            checkboxesGenChecked.push(element);
+            if (input.checked) {
+                checkboxesGenChecked.push(element);
+            }
+            else {
+                let find = checkboxesGenChecked.findIndex(e => e === element);
+                checkboxesGenChecked.splice(find, 1);
+            }
         });
         div.append(input);
         let label = document.createElement('label');
@@ -87,9 +91,14 @@ nav_search_by.addEventListener('click', () => {
     const submitGen = document.createElement('button');
     submitGen.textContent = "OK";
     submitGen.addEventListener('click', () => {
-        // TODO: searchByGen()
-        console.log('click submitGen');
+        // TODO: remove all App children
+        console.log('on click submitGen');
+        checkboxesGenChecked.forEach(element => {
+            fetchPkmBy(element, URL_ALL_PKM, logData);
+        });
+        console.log('after click submitGen');
         console.log(checkboxesGenChecked);
+        navbar.removeChild(checkBoxesDiv);
     });
     checkBoxesGen.append(submitGen);
     const checkBoxesTypes = document.createElement('fieldset');
@@ -103,9 +112,13 @@ nav_search_by.addEventListener('click', () => {
         input.name = "type-" + element;
         input.id = element.toString();
         input.addEventListener('change', () => {
-            console.log(element);
-            // TODO: if(array !contains) {add} else {remove}
-            checkboxesTypesChecked.push(element);
+            if (input.checked) {
+                checkboxesTypesChecked.push(element);
+            }
+            else {
+                let find = checkboxesTypesChecked.findIndex(e => e === element);
+                checkboxesTypesChecked.splice(find, 1);
+            }
         });
         div.append(input);
         let label = document.createElement('label');
@@ -118,16 +131,23 @@ nav_search_by.addEventListener('click', () => {
     const submitTypes = document.createElement('button');
     submitTypes.textContent = "OK";
     submitTypes.addEventListener('click', () => {
-        // TODO: searchByType()
-        console.log('click submitTypes');
+        // TODO: remove all App children
+        console.log('on click submitTypes');
+        checkboxesTypesChecked.forEach(element => {
+            fetchPkmBy(element, URL_ALL_PKM, logData);
+        });
+        console.log('after click submitTypes');
         console.log(checkboxesTypesChecked);
+        navbar.removeChild(checkBoxesDiv);
     });
     checkBoxesTypes.append(submitTypes);
     navbar.append(checkBoxesDiv);
 });
-// if(checkedGen.checked) {
-//     console.log('check');
-// }
+function logData(data) {
+    // TODO: ENCODE buildDOM with all getted data
+    // TODO: create all new App children
+    console.log(data);
+}
 // ------------------------FUNCTIONS----------------------------
 /**
  *

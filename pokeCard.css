@@ -1,0 +1,95 @@
+.card, .resist-card {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
+    background-color: var(--light-medium-color);
+    border-radius: 20px;
+    border: var(--dark-color) 4px solid;
+    width: 200px;
+    height: 260px;
+    margin: 15px 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    box-shadow: 3px 8px 7px 2px rgba(0,0,0,0.5);
+}
+
+.card {
+    max-width: 250px;
+}
+
+.card-img {
+    background-color: var(--medium-color);
+    border: var(--dark-color) 3px solid;
+    border-radius: 20px;
+    margin: 10px auto 0;
+    width: 90%;
+    height: 40%;
+    object-fit: contain;
+}
+
+.card-name {
+    text-transform: capitalize;
+    color: var(--light-color);
+    font-size: 0.9rem;
+    background-color: var(--dark-color);
+    border-radius: 30px;
+    padding: 3px 5px 3px 6px;
+    margin: 3px 5px 5px 10px;
+    position: absolute;
+    left: 0;
+}
+
+.card-gen {
+    font-weight: 300;
+    font-size: 0.8rem;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    position: absolute;
+    padding: 3px 7px 3px 5px;
+    margin: 0 10px 8px;
+    border-radius: 10px;
+    top: 40%;
+    right: 0;
+}
+
+.card-stats {
+    background-color: var(--medium-color);
+    border: var(--dark-medium-color) 3px solid;
+    font-weight: 100;
+    font-size: small;
+    border-radius: 20px;
+    margin: 2px auto;
+    width: 90%;
+    height: 50%;
+    font-size: 0.7rem;
+    padding-top: 2px;
+    display: grid;
+    grid-template-columns: 25%, auto;
+}
+
+.card-stat {
+    text-align: center;
+    width: 50px;
+    grid-column: 1;
+}
+
+.stat {
+    box-shadow: inset 0px 0px 6px 1px var(--dark-color, 0.3);
+    width: 110px; 
+    height: 15px;
+    position: relative;
+    border-radius: 15px;
+    grid-column: 2;
+}
+
+.stat-value {
+    box-shadow: inset 0px 0px 4px 4px var(--dark-color);
+    color: var(--light-color);
+    position: absolute;
+    border-radius: 15px;
+    padding: 2px 2px 0 6px;
+    height: 13px;
+    max-width: 102px;
+}

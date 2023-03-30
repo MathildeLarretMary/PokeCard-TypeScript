@@ -6,81 +6,7 @@ export class PokeCard extends HTMLElement {
         this._root = this.attachShadow({mode:'open'})
         this._root.innerHTML = `
         <style>
-        .card, .resist-card {
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            position: relative;
-            background-color: var(--light-medium-color);
-            border-radius: 20px;
-            border: var(--dark-color) 4px solid;
-            width: 250px;
-            height: 350px;
-            /*TODO: change on @media-queries */
-            margin: 15px 0;
         
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        
-            box-shadow: 3px 8px 7px 2px rgba(0,0,0,0.5);
-        }
-        
-        .card {
-            max-width: 250px;
-        }
-        
-        .card-img {
-            background-color: var(--medium-color);
-            border: var(--dark-color) 3px solid;
-            border-radius: 20px;
-            margin: 10px auto 5px;
-            width: 90%;
-            height: 40%;
-            object-fit: contain;
-        }
-        
-        .card-name {
-           text-transform: capitalize;
-           color: var(--light-color);
-            font-weight: 700;
-            background-color: var(--dark-color);
-            border-radius: 30px;
-            padding: 3px 5px 5px 5px;
-            margin: 5px 5px 5px 10px;
-            position: absolute;
-            left: 0;
-        }
-        
-        .card-gen {
-            font-weight: 300;
-            font-size: smaller;
-            background-color: var(--dark-medium-color);
-            position: absolute;
-            padding: 3px 7px 3px 5px;
-            margin: 0 10px 8px;
-            border-radius: 10px;
-            bottom: 57%;
-            right: 10px;
-        }
-        
-        .card-stats {
-            background-color: var(--medium-color);
-            border: var(--dark-medium-color) 3px solid;
-            border-radius: 20px;
-            margin: 5px auto 10px;
-            width: 90%;
-            min-height: 50%;
-        
-            display: flex;
-            flex-wrap: wrap;
-        }
-        
-        .card-stat {
-            background-color: var(--dark-medium-color);
-            border-radius: 20px;
-            width: 80%;
-            margin: 2px auto;
-            padding: 4px 10px 0;
-        }
         
         ::slotted(button) {
             background-color: var(--light-color);
@@ -88,15 +14,20 @@ export class PokeCard extends HTMLElement {
             border: var(--dark-color) solid 2px;
             position: absolute;
             right: 0;
-            height: 30px;
-            width: 30px;
-            padding: 1px 1px 0 0;
+            height: 20px;
+            width: 20px;
+            padding: 1px;
             border-radius: 30px;
             font-weight: bolder;
             font-size: large;
         }
         </style>
         `
+
+        let style = document.createElement('link')
+        style.setAttribute('rel', 'stylesheet')
+        style.setAttribute('href', 'pokeCard.css')
+        this._root.append(style)
     }
 
     connectedCallback(): void {
@@ -165,28 +96,81 @@ export class PokeCard extends HTMLElement {
 
         const statHp = document.createElement('span')! as HTMLSpanElement // stat_hp
         statHp.classList.add('card-stat')
-        statHp.textContent = 'HP : ' + stat_hp
+        statHp.textContent = 'HP : '
+        const spanHp = document.createElement('span')! as HTMLSpanElement
+        spanHp.classList.add('stat')
+        const spanHpValue = document.createElement('span')! as HTMLSpanElement
+        spanHpValue.classList.add('stat-value')
+        spanHpValue.textContent = stat_hp
+        spanHpValue.setAttribute('style',`width: ${Number(stat_hp)*0.55}px; ` )
+        spanHp.append(spanHpValue)
         stats.append(statHp)
+        stats.append(spanHp)
+
         const statAtt = document.createElement('span')! as HTMLSpanElement // stat_att
         statAtt.classList.add('card-stat')
-        statAtt.textContent = 'Att : ' + stat_att
+        statAtt.textContent = 'Att : '
+        const spanAtt = document.createElement('span')! as HTMLSpanElement
+        spanAtt.classList.add('stat')
+        const spanAttValue = document.createElement('span')! as HTMLSpanElement
+        spanAttValue.classList.add('stat-value')
+        spanAttValue.textContent = stat_att
+        spanAttValue.setAttribute('style',`width: ${Number(stat_att)*0.55}px; ` )
+        spanAtt.append(spanAttValue)
         stats.append(statAtt)
+        stats.append(spanAtt)
+
         const statDef = document.createElement('span')! as HTMLSpanElement // stat_def
         statDef.classList.add('card-stat')
-        statDef.textContent = 'Def : ' + stat_def
+        statDef.textContent = 'Def : '
+        const spanDef = document.createElement('span')! as HTMLSpanElement
+        spanDef.classList.add('stat')
+        const spanDefValue = document.createElement('span')! as HTMLSpanElement
+        spanDefValue.classList.add('stat-value')
+        spanDefValue.textContent = stat_def
+        spanDefValue.setAttribute('style',`width: ${Number(stat_def)*0.55}px; ` )
+        spanDef.append(spanDefValue)
         stats.append(statDef)
+        stats.append(spanDef)
+
         const statAttSpe = document.createElement('span')! as HTMLSpanElement // stat_att_spe
         statAttSpe.classList.add('card-stat')
-        statAttSpe.textContent = 'Att.Spé : ' + stat_att_spe
+        statAttSpe.textContent = 'Att.Spé : '
+        const spanAttSpe = document.createElement('span')! as HTMLSpanElement
+        spanAttSpe.classList.add('stat')
+        const spanAttSpeValue = document.createElement('span')! as HTMLSpanElement
+        spanAttSpeValue.classList.add('stat-value')
+        spanAttSpeValue.textContent = stat_att_spe
+        spanAttSpeValue.setAttribute('style',`width: ${Number(stat_att_spe)*0.55}px; ` )
+        spanAttSpe.append(spanAttSpeValue)
         stats.append(statAttSpe)
+        stats.append(spanAttSpe)
+
         const statDefSpe = document.createElement('span')! as HTMLSpanElement // stat_def_spe
         statDefSpe.classList.add('card-stat')
-        statDefSpe.textContent = 'Def.Spé : ' + stat_def_spe
+        statDefSpe.textContent = 'Def.Spé : '
+        const spanDefSpe = document.createElement('span')! as HTMLSpanElement
+        spanDefSpe.classList.add('stat')
+        const spanDefSpeValue = document.createElement('span')! as HTMLSpanElement
+        spanDefSpeValue.classList.add('stat-value')
+        spanDefSpeValue.textContent = stat_def_spe
+        spanDefSpeValue.setAttribute('style', `width: ${Number(stat_def_spe)*0.55}px; `)
+        spanDefSpe.append(spanDefSpeValue)
         stats.append(statDefSpe)
+        stats.append(spanDefSpe)
+
         const statSpeed = document.createElement('span')! as HTMLSpanElement // stat_speed
         statSpeed.classList.add('card-stat')
-        statSpeed.textContent = 'Vit : ' + stat_speed
+        statSpeed.textContent = 'Vit : '
+        const spanSpeed = document.createElement('span')! as HTMLSpanElement
+        spanSpeed.classList.add('stat')
+        const spanSpeedValue = document.createElement('span')! as HTMLSpanElement
+        spanSpeedValue.classList.add('stat-value')
+        spanSpeedValue.textContent = stat_speed
+        spanSpeedValue.setAttribute('style', `width: ${Number(stat_speed)*0.55}px; `)
+        spanSpeed.append(spanSpeedValue)
         stats.append(statSpeed)
+        stats.append(spanSpeed)
 
         cardDiv.append(stats)
 
