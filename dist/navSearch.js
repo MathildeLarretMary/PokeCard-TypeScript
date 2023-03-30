@@ -5,6 +5,9 @@ import { createModale } from "./Fuctions.js";
 const nav_input = document.querySelector('.nav-input');
 const nav_submit = document.querySelector('.nav-submit');
 const navbar = document.querySelector('.navbar');
+const nav_search_by = document.querySelector('#nav-search-btn');
+let listGen = [1, 2, 3, 4, 5, 6, 7, 8];
+let listType = ["Normal", "Feu", "Eau", "Électrik", "Plante", "Glace", "Combat", "Poison", "Sol", "Vol", "Psy", "Insecte", "Roche", "Spectre", "Dragon", "Ténèbres", "Acier", "Fée"];
 // ------------------------EVENT LISTENERS----------------------------
 nav_submit.addEventListener('click', () => {
     var _a;
@@ -45,6 +48,86 @@ nav_input.addEventListener('keyup', (e) => {
         }
     }
 });
+nav_search_by.addEventListener('click', () => {
+    const checkBoxesDiv = document.createElement('div');
+    checkBoxesDiv.classList.add('checkboxes');
+    checkBoxesDiv.textContent = "Recherche Avancée :";
+    const closeCheckBoxesDiv = document.createElement('button');
+    closeCheckBoxesDiv.textContent = "X";
+    closeCheckBoxesDiv.classList.add('close-checkboxes');
+    closeCheckBoxesDiv.addEventListener('click', () => {
+        navbar.removeChild(checkBoxesDiv);
+    });
+    checkBoxesDiv.append(closeCheckBoxesDiv);
+    const checkBoxesGen = document.createElement('fieldset');
+    const lengendGen = document.createElement('legend');
+    lengendGen.textContent = "Par Génération :";
+    checkBoxesGen.append(lengendGen);
+    let checkboxesGenChecked = [];
+    let checkboxesTypesChecked = [];
+    listGen.forEach(element => {
+        let div = document.createElement('div');
+        let input = document.createElement('input');
+        input.type = "checkbox";
+        input.name = "gen-" + element;
+        input.id = element.toString();
+        input.addEventListener('change', () => {
+            console.log(element);
+            // TODO: if(array !contains) {add} else {remove}
+            checkboxesGenChecked.push(element);
+        });
+        div.append(input);
+        let label = document.createElement('label');
+        label.textContent = "Gen " + element;
+        label.htmlFor = "gen-" + element;
+        div.append(label);
+        checkBoxesGen.append(div);
+        checkBoxesDiv.append(checkBoxesGen);
+    });
+    const submitGen = document.createElement('button');
+    submitGen.textContent = "OK";
+    submitGen.addEventListener('click', () => {
+        // TODO: searchByGen()
+        console.log('click submitGen');
+        console.log(checkboxesGenChecked);
+    });
+    checkBoxesGen.append(submitGen);
+    const checkBoxesTypes = document.createElement('fieldset');
+    const lengendTypes = document.createElement('legend');
+    lengendTypes.textContent = "Par Type :";
+    checkBoxesTypes.append(lengendTypes);
+    listType.forEach(element => {
+        let div = document.createElement('div');
+        let input = document.createElement('input');
+        input.type = "checkbox";
+        input.name = "type-" + element;
+        input.id = element.toString();
+        input.addEventListener('change', () => {
+            console.log(element);
+            // TODO: if(array !contains) {add} else {remove}
+            checkboxesTypesChecked.push(element);
+        });
+        div.append(input);
+        let label = document.createElement('label');
+        label.textContent = element.toString();
+        label.htmlFor = "type-" + element;
+        div.append(label);
+        checkBoxesTypes.append(div);
+        checkBoxesDiv.append(checkBoxesTypes);
+    });
+    const submitTypes = document.createElement('button');
+    submitTypes.textContent = "OK";
+    submitTypes.addEventListener('click', () => {
+        // TODO: searchByType()
+        console.log('click submitTypes');
+        console.log(checkboxesTypesChecked);
+    });
+    checkBoxesTypes.append(submitTypes);
+    navbar.append(checkBoxesDiv);
+});
+// if(checkedGen.checked) {
+//     console.log('check');
+// }
 // ------------------------FUNCTIONS----------------------------
 /**
  *
@@ -86,10 +169,4 @@ function createFindedList(ElementHTML, list) {
     });
     navbar.append(ElementHTML);
 }
-// export function createOneCard(data: Data) : void {
-//     console.log(data);
-//     let newModale = new PokemonCard(data.id, data.name, data.image, data.sprite, data.apiGeneration, data.stats, data.apiTypes, data.apiResistances)
-//     newModale.createModale()
-//     return   
-// }
 //# sourceMappingURL=navSearch.js.map

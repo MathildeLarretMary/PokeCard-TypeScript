@@ -6,6 +6,12 @@ import { createModale } from "./Fuctions.js";
 const nav_input = document.querySelector('.nav-input')! as HTMLInputElement
 const nav_submit = document.querySelector('.nav-submit') as HTMLButtonElement
 const navbar = document.querySelector('.navbar')! as HTMLElement
+const nav_search_by = document.querySelector('#nav-search-btn')! as HTMLButtonElement
+
+type checkBoxes = Array<number> | Array<string>
+
+let listGen : checkBoxes = [1, 2, 3, 4, 5, 6, 7, 8]
+let listType: checkBoxes = ["Normal", "Feu", "Eau", "Électrik", "Plante", "Glace", "Combat", "Poison", "Sol", "Vol", "Psy", "Insecte", "Roche", "Spectre", "Dragon", "Ténèbres", "Acier", "Fée"]
 
 // ------------------------EVENT LISTENERS----------------------------
 nav_submit.addEventListener('click', () => {
@@ -57,6 +63,95 @@ nav_input.addEventListener('keyup' , (e) => {
     }
 })
 
+nav_search_by.addEventListener('click', () => {
+    const checkBoxesDiv = document.createElement('div')! as HTMLDivElement
+    checkBoxesDiv.classList.add('checkboxes')
+    checkBoxesDiv.textContent = "Recherche Avancée :"
+
+    const closeCheckBoxesDiv = document.createElement('button')! as HTMLButtonElement
+    closeCheckBoxesDiv.textContent = "X"
+    closeCheckBoxesDiv.classList.add('close-checkboxes')
+    closeCheckBoxesDiv.addEventListener('click', () => {
+        navbar.removeChild(checkBoxesDiv)
+    })
+    checkBoxesDiv.append(closeCheckBoxesDiv)
+
+    const checkBoxesGen = document.createElement('fieldset')! as HTMLFieldSetElement
+    const lengendGen = document.createElement('legend')! as HTMLLegendElement
+    lengendGen.textContent = "Par Génération :"
+    checkBoxesGen.append(lengendGen)
+
+    let checkboxesGenChecked : Array<number|string> = []
+    let checkboxesTypesChecked : Array<number|string> = []
+
+    listGen.forEach(element => {
+        let div = document.createElement('div')! as HTMLDivElement
+        let input = document.createElement('input')! as HTMLInputElement
+        input.type = "checkbox"
+        input.name = "gen-" + element
+        input.id = element.toString()
+        input.addEventListener('change', () => {
+            console.log(element);
+            // TODO: if(array !contains) {add} else {remove}
+            checkboxesGenChecked.push(element)
+        })
+        div.append(input)
+        let label = document.createElement('label')! as HTMLLabelElement
+        label.textContent = "Gen " + element
+        label.htmlFor = "gen-" + element
+        div.append(label)
+        checkBoxesGen.append(div)
+        checkBoxesDiv.append(checkBoxesGen)
+    })
+    const submitGen = document.createElement('button')! as HTMLButtonElement
+    submitGen.textContent = "OK"
+    submitGen.addEventListener('click', () => {
+        // TODO: searchByGen()
+        console.log('click submitGen');
+        console.log(checkboxesGenChecked);
+    })
+    checkBoxesGen.append(submitGen)
+
+    const checkBoxesTypes = document.createElement('fieldset')! as HTMLFieldSetElement
+    const lengendTypes = document.createElement('legend')! as HTMLLegendElement
+    lengendTypes.textContent = "Par Type :"
+    checkBoxesTypes.append(lengendTypes)
+    listType.forEach(element => {
+        let div = document.createElement('div')! as HTMLDivElement
+        let input = document.createElement('input')! as HTMLInputElement
+        input.type = "checkbox"
+        input.name = "type-" + element
+        input.id = element.toString()
+        input.addEventListener('change', () => {
+            console.log(element);
+            // TODO: if(array !contains) {add} else {remove}
+            checkboxesTypesChecked.push(element)
+        })
+        div.append(input)
+        let label = document.createElement('label')! as HTMLLabelElement
+        label.textContent = element.toString()
+        label.htmlFor = "type-" + element
+        div.append(label)
+        checkBoxesTypes.append(div)
+        checkBoxesDiv.append(checkBoxesTypes)
+    })
+
+    const submitTypes = document.createElement('button')! as HTMLButtonElement
+    submitTypes.textContent = "OK"
+    submitTypes.addEventListener('click', () => {
+        // TODO: searchByType()
+        console.log('click submitTypes');
+        console.log(checkboxesTypesChecked);
+    })
+    checkBoxesTypes.append(submitTypes)
+
+    navbar.append(checkBoxesDiv)
+})
+
+// if(checkedGen.checked) {
+//     console.log('check');
+    
+// }
 // ------------------------FUNCTIONS----------------------------
 /**
  * 
@@ -104,10 +199,3 @@ function createFindedList(ElementHTML:HTMLUListElement, list : Array<[number, st
     navbar.append(ElementHTML)
 
 }
-
-// export function createOneCard(data: Data) : void {
-//     console.log(data);
-//     let newModale = new PokemonCard(data.id, data.name, data.image, data.sprite, data.apiGeneration, data.stats, data.apiTypes, data.apiResistances)
-//     newModale.createModale()
-//     return   
-// }
