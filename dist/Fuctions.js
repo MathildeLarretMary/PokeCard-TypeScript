@@ -24,6 +24,9 @@ export function addPokeCards(data) {
         moreBtn.setAttribute('slot', 'slot-more-btn');
         moreBtn.addEventListener('click', () => {
             fetchOnePkm(URL_ALL_PKM, createModale, pkm.id);
+            if (App.querySelector('.get-all-btn')) {
+                App.querySelector('.get-all-btn').setAttribute('style', 'visibility: hidden;');
+            }
         });
         moreBtn.textContent = '+';
         pokeCard.append(moreBtn);
@@ -63,6 +66,9 @@ export function createModale(data) {
     //console.log(pkm.apiTypes[0].name, pkm.apiTypes[1] ? pkm.apiTypes[1].name : "");
     closeBtn.addEventListener('click', () => {
         App.removeChild(divApp);
+        if (App.querySelector('.get-all-btn')) {
+            App.querySelector('.get-all-btn').setAttribute('style', 'visibility: visible;');
+        }
     });
     // // puis on rajoute chaque div dans la div "app"
     divApp.append(closeBtn);

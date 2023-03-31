@@ -1,4 +1,4 @@
-import { pkmNameList, fetchOnePkm, URL_ALL_PKM, fetchPkmBy } from "./request.js";
+import { pkmNameList, fetchOnePkm, URL_ALL_PKM, fetchAllPkms, fetchPkmBy } from "./request.js";
 import { toNoAccent, addPokeCards } from "./Fuctions.js";
 import { createModale } from "./Fuctions.js";
 import { App } from "./index.js";
@@ -8,7 +8,7 @@ const nav_submit = document.querySelector('.nav-submit');
 const navbar = document.querySelector('.navbar');
 const nav_search_by = document.querySelector('#nav-search-btn');
 let listGen = [1, 2, 3, 4, 5, 6, 7, 8];
-let listType = ["Normal", "Feu", "Eau", "Électrik", "Plante", "Glace", "Combat", "Poison", "Sol", "Vol", "Psy", "Insecte", "Roche", "Spectre", "Dragon", "Ténèbres", "Acier", "Fée"];
+let listType = ["Normal", "Feu", "Eau", "Électrik", "Plante", "Glace", "Combat", "Poison", "Sol", "Vol", "Psy", "Insecte", "Roche", "Spectre", "Dragon", "Acier", "Ténèbres", "Fée"];
 // ------------------------EVENT LISTENERS----------------------------
 nav_submit.addEventListener('click', () => {
     var _a;
@@ -52,15 +52,16 @@ nav_input.addEventListener('keyup', (e) => {
 nav_search_by.addEventListener('click', () => {
     const checkBoxesDiv = document.createElement('div');
     checkBoxesDiv.classList.add('checkboxes');
-    checkBoxesDiv.textContent = "Recherche Avancée :";
+    checkBoxesDiv.textContent = "Recherche Avancée";
     const closeCheckBoxesDiv = document.createElement('button');
-    closeCheckBoxesDiv.textContent = "X";
+    closeCheckBoxesDiv.textContent = "x";
     closeCheckBoxesDiv.classList.add('close-checkboxes');
     closeCheckBoxesDiv.addEventListener('click', () => {
         navbar.removeChild(checkBoxesDiv);
     });
     checkBoxesDiv.append(closeCheckBoxesDiv);
     const checkBoxesGen = document.createElement('fieldset');
+    checkBoxesGen.classList.add('fieldset-gen');
     const lengendGen = document.createElement('legend');
     lengendGen.textContent = "Par Génération :";
     checkBoxesGen.append(lengendGen);
@@ -83,7 +84,7 @@ nav_search_by.addEventListener('click', () => {
         });
         div.append(input);
         let label = document.createElement('label');
-        label.textContent = "Gen " + element;
+        label.textContent = element.toString();
         label.htmlFor = "gen-" + element;
         div.append(label);
         checkBoxesGen.append(div);
@@ -93,23 +94,29 @@ nav_search_by.addEventListener('click', () => {
     submitGen.textContent = "OK";
     submitGen.addEventListener('click', () => {
         if (typeof checkboxesGenChecked[0] !== 'undefined') {
-            // TODO: remove all App children
             while (App.firstChild) {
                 App.removeChild(App.firstChild);
             }
-            console.log('on click submitGen');
-            console.log('not null');
-            checkboxesGenChecked.forEach(element => {
-                console.log(element);
-                fetchPkmBy(element, URL_ALL_PKM, addPokeCards);
-            });
-            console.log('after click submitGen');
+            if (checkboxesGenChecked.length < listGen.length) {
+                let getAllBtn = document.createElement('button');
+                getAllBtn.classList.add('get-all-btn');
+                getAllBtn.textContent = 'All';
+                getAllBtn.addEventListener('click', () => {
+                    while (App.firstChild) {
+                        App.removeChild(App.firstChild);
+                    }
+                    fetchAllPkms(URL_ALL_PKM, addPokeCards);
+                });
+                App.prepend(getAllBtn);
+            }
+            checkboxesGenChecked.forEach(element => fetchPkmBy(element, URL_ALL_PKM, addPokeCards));
         }
         console.log(checkboxesGenChecked);
         navbar.removeChild(checkBoxesDiv);
     });
     checkBoxesGen.append(submitGen);
     const checkBoxesTypes = document.createElement('fieldset');
+    checkBoxesTypes.classList.add('fieldset-types');
     const lengendTypes = document.createElement('legend');
     lengendTypes.textContent = "Par Type :";
     checkBoxesTypes.append(lengendTypes);
@@ -140,13 +147,22 @@ nav_search_by.addEventListener('click', () => {
     submitTypes.textContent = "OK";
     submitTypes.addEventListener('click', () => {
         if (typeof checkboxesTypesChecked[0] !== 'undefined') {
-            // TODO: remove all App children
             while (App.firstChild) {
                 App.removeChild(App.firstChild);
             }
-            console.log('on click submitTypes');
+            if (checkboxesTypesChecked.length < listType.length) {
+                let getAllBtn = document.createElement('button');
+                getAllBtn.classList.add('get-all-btn');
+                getAllBtn.textContent = 'All';
+                getAllBtn.addEventListener('click', () => {
+                    while (App.firstChild) {
+                        App.removeChild(App.firstChild);
+                    }
+                    fetchAllPkms(URL_ALL_PKM, addPokeCards);
+                });
+                App.prepend(getAllBtn);
+            }
             checkboxesTypesChecked.forEach(element => fetchPkmBy(element, URL_ALL_PKM, addPokeCards));
-            console.log('after click submitTypes');
         }
         console.log(checkboxesTypesChecked);
         navbar.removeChild(checkBoxesDiv);
@@ -154,9 +170,6 @@ nav_search_by.addEventListener('click', () => {
     checkBoxesTypes.append(submitTypes);
     navbar.append(checkBoxesDiv);
 });
-function logData(data) {
-    addPokeCards(data);
-}
 // ------------------------FUNCTIONS----------------------------
 /**
  *

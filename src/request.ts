@@ -43,7 +43,7 @@ export const fetchOnePkm = async (_url:string , callback: (data : Data) => void,
         let response = await fetch(_url + `/${_value}`) 
 
         if(response.ok) {
-            let data:Data= await response.json()
+            let data:Data = await response.json()
             
             callback(data)
             

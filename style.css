@@ -75,16 +75,68 @@ nav > * {
     padding: 0 15px;
 }
 
-.checkboxes{
+.checkboxes {
     width: 150px;
     position: absolute;
+    padding: 8px 5px;
     z-index: 1;
     margin-top: 35px;
     margin-left: -120px;
-
     background-color: var(--light-medium-color);
     border: var(--dark-medium-color) 3px solid;
     border-radius: 20px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.9rem;
+}
+
+.checkboxes > fieldset {
+    margin-top: 15px;
+}
+
+fieldset {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 5px auto;
+}
+
+fieldset > * {
+    display: flex;
+}
+
+fieldset > legend {
+    margin-bottom: 5px;
+}
+
+fieldset > * > label {
+    font-size: small;
+    padding-top: 3px;
+}
+
+fieldset > button {
+    margin-top: 5px;
+    height: 25px;
+    width: 25px;
+    padding: 6px 0 0 2px;
+    border-radius: 30px;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    border: none;
+    font-weight: bolder;
+}
+
+.close-checkboxes {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    border: var(--dark-color) solid 2px;
+    position: absolute;
+    margin-top: -15px;
+    margin-left: 0px;
+    height: 25px;
+    width: 25px;
+    padding: auto;
+    border-radius: 30px;
+    font-weight: bolder;
 }
 
 .list-finded {
@@ -120,12 +172,24 @@ nav > * {
     justify-content: space-around;
 }
 
+.get-all-btn {
+    background-color: var(--light-medium-color);
+    border: var(--dark-color) 3px solid;
+    z-index: 5;
+    position: fixed;
+    right: 15px;
+    top: 16vh;
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+}
+
 /*-------------------------MODALE----------------------------*/
 
 .modale {
     position: fixed;
     top: 0;
-    z-index: 2;
+    z-index: 1;
     height: 100vh;
     width: 100vw;
     padding-top: 40px;
@@ -143,7 +207,7 @@ nav > * {
 }
 
 .close-modale {
-    z-index: 1;
+    z-index: 0;
     position: absolute;
 
     height: 30px;

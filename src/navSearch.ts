@@ -1,4 +1,4 @@
-import {  pkmNameList, PokemonName, fetchOnePkm, URL_ALL_PKM, Data, fetchPkmBy } from "./request.js";
+import {  pkmNameList, PokemonName, fetchOnePkm, URL_ALL_PKM, fetchAllPkms, fetchPkmBy } from "./request.js";
 import { toNoAccent, addPokeCards } from "./Fuctions.js";
 import { createModale } from "./Fuctions.js";
 import { App } from "./index.js";
@@ -12,7 +12,7 @@ const nav_search_by = document.querySelector('#nav-search-btn')! as HTMLButtonEl
 type checkBoxes = Array<number> | Array<string>
 
 let listGen : checkBoxes = [1, 2, 3, 4, 5, 6, 7, 8]
-let listType: checkBoxes = ["Normal", "Feu", "Eau", "Électrik", "Plante", "Glace", "Combat", "Poison", "Sol", "Vol", "Psy", "Insecte", "Roche", "Spectre", "Dragon", "Ténèbres", "Acier", "Fée"]
+let listType: checkBoxes = ["Normal", "Feu", "Eau", "Électrik", "Plante", "Glace", "Combat", "Poison", "Sol", "Vol", "Psy", "Insecte", "Roche", "Spectre", "Dragon",  "Acier", "Ténèbres", "Fée"]
 
 // ------------------------EVENT LISTENERS----------------------------
 nav_submit.addEventListener('click', () => {
@@ -67,10 +67,10 @@ nav_input.addEventListener('keyup' , (e) => {
 nav_search_by.addEventListener('click', () => {
     const checkBoxesDiv = document.createElement('div')! as HTMLDivElement
     checkBoxesDiv.classList.add('checkboxes')
-    checkBoxesDiv.textContent = "Recherche Avancée :"
+    checkBoxesDiv.textContent = "Recherche Avancée"
 
     const closeCheckBoxesDiv = document.createElement('button')! as HTMLButtonElement
-    closeCheckBoxesDiv.textContent = "X"
+    closeCheckBoxesDiv.textContent = "x"
     closeCheckBoxesDiv.classList.add('close-checkboxes')
     closeCheckBoxesDiv.addEventListener('click', () => {
         navbar.removeChild(checkBoxesDiv)
@@ -78,6 +78,7 @@ nav_search_by.addEventListener('click', () => {
     checkBoxesDiv.append(closeCheckBoxesDiv)
 
     const checkBoxesGen = document.createElement('fieldset')! as HTMLFieldSetElement
+    checkBoxesGen.classList.add('fieldset-gen')
     const lengendGen = document.createElement('legend')! as HTMLLegendElement
     lengendGen.textContent = "Par Génération :"
     checkBoxesGen.append(lengendGen)
@@ -101,7 +102,7 @@ nav_search_by.addEventListener('click', () => {
         })
         div.append(input)
         let label = document.createElement('label')! as HTMLLabelElement
-        label.textContent = "Gen " + element
+        label.textContent = element.toString()
         label.htmlFor = "gen-" + element
         div.append(label)
         checkBoxesGen.append(div)
@@ -111,18 +112,22 @@ nav_search_by.addEventListener('click', () => {
     submitGen.textContent = "OK"
     submitGen.addEventListener('click', () => {
         if(typeof checkboxesGenChecked[0] !== 'undefined') {
-            // TODO: remove all App children
             while(App.firstChild) {
                 App.removeChild(App.firstChild)
             }
-            console.log('on click submitGen');          
-            console.log('not null');
-            checkboxesGenChecked.forEach(element =>{ 
-                console.log(element);
-                
-                fetchPkmBy(element, URL_ALL_PKM, addPokeCards)
-            })
-            console.log('after click submitGen');
+            if(checkboxesGenChecked.length < listGen.length) {
+                let getAllBtn = document.createElement('button')! as HTMLButtonElement
+                getAllBtn.classList.add('get-all-btn')
+                getAllBtn.textContent = 'All'
+                getAllBtn.addEventListener('click', () => {
+                    while(App.firstChild) {
+                        App.removeChild(App.firstChild)
+                    }
+                    fetchAllPkms(URL_ALL_PKM, addPokeCards)
+                })
+                App.prepend(getAllBtn)
+            }
+            checkboxesGenChecked.forEach(element =>fetchPkmBy(element, URL_ALL_PKM, addPokeCards))
         }
         
         console.log(checkboxesGenChecked);
@@ -131,6 +136,7 @@ nav_search_by.addEventListener('click', () => {
     checkBoxesGen.append(submitGen)
 
     const checkBoxesTypes = document.createElement('fieldset')! as HTMLFieldSetElement
+    checkBoxesTypes.classList.add('fieldset-types')
     const lengendTypes = document.createElement('legend')! as HTMLLegendElement
     lengendTypes.textContent = "Par Type :"
     checkBoxesTypes.append(lengendTypes)
@@ -161,13 +167,22 @@ nav_search_by.addEventListener('click', () => {
     submitTypes.textContent = "OK"
     submitTypes.addEventListener('click', () => {
         if(typeof checkboxesTypesChecked[0] !== 'undefined') {
-            // TODO: remove all App children
             while(App.firstChild) {
                 App.removeChild(App.firstChild)
             }
-            console.log('on click submitTypes');
-            checkboxesTypesChecked.forEach(element => fetchPkmBy(element, URL_ALL_PKM, addPokeCards))
-            console.log('after click submitTypes');   
+            if(checkboxesTypesChecked.length < listType.length) {
+                let getAllBtn = document.createElement('button')! as HTMLButtonElement
+                getAllBtn.classList.add('get-all-btn')
+                getAllBtn.textContent = 'All'
+                getAllBtn.addEventListener('click', () => {
+                    while(App.firstChild) {
+                        App.removeChild(App.firstChild)
+                    }
+                    fetchAllPkms(URL_ALL_PKM, addPokeCards)
+                })
+                App.prepend(getAllBtn)
+            }
+            checkboxesTypesChecked.forEach(element => fetchPkmBy(element, URL_ALL_PKM, addPokeCards)) 
         }
 
         console.log(checkboxesTypesChecked);
@@ -177,11 +192,6 @@ nav_search_by.addEventListener('click', () => {
 
     navbar.append(checkBoxesDiv)
 })
-
-
-function logData (data : Data[]) : void {
-    addPokeCards(data);
-}
 
 // ------------------------FUNCTIONS----------------------------
 /**
