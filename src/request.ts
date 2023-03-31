@@ -12,7 +12,7 @@ export const URL_ALL_PKM:string = 'https://pokebuildapi.fr/api/v1/pokemon'
  * @param callback ici (data : {}[]) => {}[] ---> les données passées et retournées sont un tableau d'objet ===> JSON
  * @returns 
  */
-export const fetchAllPkms = async (_url:string , callback: (data : Data[]) => {}[] ) => {
+export const fetchAllPkms = async (_url:string , callback: (data : Data[]) => void) => {
 
         try {
             let response = await fetch(_url)
@@ -56,14 +56,14 @@ export const fetchOnePkm = async (_url:string , callback: (data : Data) => void,
     }
 }
 
-export async function fetchPkmBy(element:string|number, _url:string, callback : (data: Data) => void) {
+export async function fetchPkmBy(element:string|number, _url:string, callback : (data: Data[]) => void) {
     if(typeof(element)==='number') {
         console.log('by gen');
         try {
             let response = await fetch(_url + `/generation/${element}`)
 
             if(response.ok) {
-                let data:Data = await response.json()
+                let data:Data[] = await response.json()
 
                 callback(data)
                 
@@ -81,7 +81,7 @@ export async function fetchPkmBy(element:string|number, _url:string, callback : 
             let response = await fetch(_url + `/type/${element}`)
 
             if(response.ok) {
-                let data:Data = await response.json()
+                let data:Data[] = await response.json()
 
                 callback(data)
                 

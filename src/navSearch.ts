@@ -1,6 +1,7 @@
 import {  pkmNameList, PokemonName, fetchOnePkm, URL_ALL_PKM, Data, fetchPkmBy } from "./request.js";
-import { toNoAccent } from "./Fuctions.js";
+import { toNoAccent, addPokeCards } from "./Fuctions.js";
 import { createModale } from "./Fuctions.js";
+import { App } from "./index.js";
 
 // Get nav-input and nav-submit
 const nav_input = document.querySelector('.nav-input')! as HTMLInputElement
@@ -109,12 +110,21 @@ nav_search_by.addEventListener('click', () => {
     const submitGen = document.createElement('button')! as HTMLButtonElement
     submitGen.textContent = "OK"
     submitGen.addEventListener('click', () => {
-        // TODO: remove all App children
-        console.log('on click submitGen');
-        checkboxesGenChecked.forEach(element => {
-            fetchPkmBy(element, URL_ALL_PKM, logData)
-        })
-        console.log('after click submitGen');
+        if(typeof checkboxesGenChecked[0] !== 'undefined') {
+            // TODO: remove all App children
+            while(App.firstChild) {
+                App.removeChild(App.firstChild)
+            }
+            console.log('on click submitGen');          
+            console.log('not null');
+            checkboxesGenChecked.forEach(element =>{ 
+                console.log(element);
+                
+                fetchPkmBy(element, URL_ALL_PKM, addPokeCards)
+            })
+            console.log('after click submitGen');
+        }
+        
         console.log(checkboxesGenChecked);
         navbar.removeChild(checkBoxesDiv)
     })
@@ -150,12 +160,16 @@ nav_search_by.addEventListener('click', () => {
     const submitTypes = document.createElement('button')! as HTMLButtonElement
     submitTypes.textContent = "OK"
     submitTypes.addEventListener('click', () => {
-        // TODO: remove all App children
-        console.log('on click submitTypes');
-        checkboxesTypesChecked.forEach(element => {
-            fetchPkmBy(element, URL_ALL_PKM, logData)
-        })
-        console.log('after click submitTypes');
+        if(typeof checkboxesTypesChecked[0] !== 'undefined') {
+            // TODO: remove all App children
+            while(App.firstChild) {
+                App.removeChild(App.firstChild)
+            }
+            console.log('on click submitTypes');
+            checkboxesTypesChecked.forEach(element => fetchPkmBy(element, URL_ALL_PKM, addPokeCards))
+            console.log('after click submitTypes');   
+        }
+
         console.log(checkboxesTypesChecked);
         navbar.removeChild(checkBoxesDiv)
     })
@@ -165,11 +179,8 @@ nav_search_by.addEventListener('click', () => {
 })
 
 
-function logData (data : Data) : void {
-    // TODO: ENCODE buildDOM with all getted data
-    // TODO: create all new App children
-    console.log(data);
-    
+function logData (data : Data[]) : void {
+    addPokeCards(data);
 }
 
 // ------------------------FUNCTIONS----------------------------

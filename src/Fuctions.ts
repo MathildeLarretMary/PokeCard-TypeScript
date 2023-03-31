@@ -9,7 +9,7 @@ export function toNoAccent(string: string) : string {
     return string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-export function addPokeCard(data:Data[]) : Data[] {
+export function addPokeCards(data:Data[]) : void {
     for(let pkm of data) {
         let pokeCard = document.createElement('poke-card')
         pokeCard.setAttribute('data-name', pkm.name)
@@ -32,7 +32,7 @@ export function addPokeCard(data:Data[]) : Data[] {
 
         App?.append(pokeCard)
     }
-    return data
+    // return data
 }
 
 export function createModale(data:Data) : void {
