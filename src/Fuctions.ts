@@ -29,6 +29,9 @@ export function addPokeCards(data:Data[]) : void {
             if(App.querySelector('.get-all-btn')!) {
                 App.querySelector('.get-all-btn')!.setAttribute('style', 'visibility: hidden;')
             }
+            if(App.querySelector('.to-top-btn')!) {
+                App.querySelector('.to-top-btn')!.setAttribute('style', 'visibility: hidden;')
+            }
         })
         moreBtn.textContent = '+'
         pokeCard.append(moreBtn)
@@ -51,7 +54,6 @@ export function createModale(data:Data) : void {
     let divApp = document.createElement('div')! as HTMLDivElement
     divApp.classList.add('modale')
 
-    console.log(data);
     let closeBtn = document.createElement('button')! as HTMLButtonElement
     let divResists = document.createElement('div')! as HTMLDivElement
     let divCardStats = document.createElement('div')! as HTMLDivElement
@@ -99,10 +101,33 @@ export function createModale(data:Data) : void {
         if(App.querySelector('.get-all-btn')!) {
             App.querySelector('.get-all-btn')!.setAttribute('style', 'visibility: visible;')
         }
+        if(App.querySelector('.to-top-btn')!) {
+            App.querySelector('.to-top-btn')!.setAttribute('style', 'visibility: visible;')
+        }
+        
     })
     // // puis on rajoute chaque div dans la div "app"
     divApp.append(closeBtn)
     divApp.append(pokeCard)
     divApp.append(divResists)
     App?.prepend(divApp)
+}
+
+let toTopDOM = document.createElement('button')! as HTMLButtonElement
+
+export function scrollToTop() {
+    if(document.documentElement.scrollTop > 600 && !App.querySelector('.to-top-btn')) {
+        toTopDOM.classList.add('to-top-btn')
+        toTopDOM.textContent = "▲"
+        App.prepend(toTopDOM)
+    }
+    toTopDOM.addEventListener('click', () => {
+        document.documentElement.scrollTo({top: 0, behavior : 'smooth'})
+    })
+}
+
+export function removeButtonAfterScroll() {
+    if(document.documentElement.scrollTop === 0 && App.querySelector('.to-top-btn')) {
+        App.removeChild(toTopDOM)
+    }
 }

@@ -15,7 +15,50 @@ html::-webkit-scrollbar {
 body {
     background-color: var(--light-color);
 }
+/*-------------------------APP----------------------------*/
 
+.app {
+    z-index: 3;
+    height: 100vh;
+    /*TODO: change on @media-queries */
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.get-all-btn {
+    background-color: var(--light-medium-color);
+    border: var(--dark-color) 3px solid;
+    color: var(--dark-color);
+    font-weight: bolder;
+    font-size: xx-large;
+    padding: 0 2px 4px;
+    z-index: 5;
+    position: fixed;
+    right: 15px;
+    top: 16vh;
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+}
+
+.to-top-btn {
+    background-color: var(--light-medium-color);
+    border: var(--dark-color) 3px solid;
+    color: var(--dark-color);
+    font-weight: bolder;
+    font-size: x-large;
+    padding: 0 3px 3px;
+    position: fixed;
+    z-index: 5;
+    right: 15px;
+    top: 26vh;
+    height: 40px;
+    width: 40px;
+    border-radius: 30px;
+}
 /*-------------------------HEADER----------------------------*/
 
 .header {
@@ -159,30 +202,7 @@ fieldset > button {
     margin: 5px ;
     border-radius: 20px;
 }
-/*-------------------------APP----------------------------*/
 
-.app {
-    z-index: 3;
-    height: 100vh;
-    /*TODO: change on @media-queries */
-    width: 100%;
-    margin: 10px auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.get-all-btn {
-    background-color: var(--light-medium-color);
-    border: var(--dark-color) 3px solid;
-    z-index: 5;
-    position: fixed;
-    right: 15px;
-    top: 16vh;
-    height: 40px;
-    width: 40px;
-    border-radius: 30px;
-}
 
 /*-------------------------MODALE----------------------------*/
 
@@ -209,28 +229,20 @@ fieldset > button {
 .close-modale {
     z-index: 2;
     position: absolute;
-
-    height: 30px;
-    width: 30px;
-    border-radius: 30px;
-    padding-top: 3px;
-
-    background-color: var(--dark-color);
-    color: var(--light-color);
+    background-color: transparent;
+    color: var(--dark-color);
     font-weight: bold;
     border: none;
 
     margin: 10px;
-    left: 70vw;
+    align-self: center;
     top: 15px;
 }
 
 .card-stats-restist {
-    box-shadow: 3px 8px 7px 2px rgba(0,0,0,0.5);
+
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 0.7em;
-    background-color: var(--light-medium-color);
-    border: var(--dark-color) 4px solid;
     border-radius: 20px;
     margin: 2px auto;
     width: 200px;
@@ -241,7 +253,8 @@ fieldset > button {
 }
 
 .card-stat-resist {
-    background-color: var(--medium-color);
+    background-color: var(--light-medium-color);
+    box-shadow: 6px 8px 7px -4px rgba(0,0,0,0.8);
     border-radius: 20px;
     width: 48%;
     margin: 2px auto;
@@ -254,13 +267,13 @@ fieldset > button {
 
 .immune {
     border-radius: 10px;
-    padding: 0 3px;
+    padding: 1px 3px 0;
     background-color: #000000;
     color: #ffffff;
 }
 
 .neutral {
-    padding: 0 3px;
+    padding: 1px 3px 0;
     border-radius: 10px;
     background-color: #ffffff;
     color: #000000;
@@ -268,29 +281,29 @@ fieldset > button {
 
 .vulnerable {
     border-radius: 10px;
-    padding: 0 3px;
+    padding: 1px 3px 0;
     background-color: #ff5454;
     color: var(--light-color);
 }
 
 .twice_vulnerable {
     border-radius: 10px;
-    padding: 0 3px;
+    padding: 1px 3px 0;
     background-color: #de0000;
     color: var(--light-color);
 }
 
 .resistant {
     border-radius: 10px;
-    padding: 0 3px;
-    background-color: #00ff15;
+    padding: 1px 3px 0;
+    background-color: #00ce11;
     color: var(--light-color);
 }
 
 .twice_resistant {
     border-radius: 10px;
-    padding: 0 3px;
-    background-color: #2cbe00;
+    padding: 1px 3px 0;
+    background-color: #208a00;
     color: var(--light-color);
 }
 

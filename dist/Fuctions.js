@@ -27,6 +27,9 @@ export function addPokeCards(data) {
             if (App.querySelector('.get-all-btn')) {
                 App.querySelector('.get-all-btn').setAttribute('style', 'visibility: hidden;');
             }
+            if (App.querySelector('.to-top-btn')) {
+                App.querySelector('.to-top-btn').setAttribute('style', 'visibility: hidden;');
+            }
         });
         moreBtn.textContent = '+';
         pokeCard.append(moreBtn);
@@ -46,7 +49,6 @@ export function addPokeCards(data) {
 export function createModale(data) {
     let divApp = document.createElement('div');
     divApp.classList.add('modale');
-    console.log(data);
     let closeBtn = document.createElement('button');
     let divResists = document.createElement('div');
     let divCardStats = document.createElement('div');
@@ -86,11 +88,30 @@ export function createModale(data) {
         if (App.querySelector('.get-all-btn')) {
             App.querySelector('.get-all-btn').setAttribute('style', 'visibility: visible;');
         }
+        if (App.querySelector('.to-top-btn')) {
+            App.querySelector('.to-top-btn').setAttribute('style', 'visibility: visible;');
+        }
     });
     // // puis on rajoute chaque div dans la div "app"
     divApp.append(closeBtn);
     divApp.append(pokeCard);
     divApp.append(divResists);
     App === null || App === void 0 ? void 0 : App.prepend(divApp);
+}
+let toTopDOM = document.createElement('button');
+export function scrollToTop() {
+    if (document.documentElement.scrollTop > 600 && !App.querySelector('.to-top-btn')) {
+        toTopDOM.classList.add('to-top-btn');
+        toTopDOM.textContent = "▲";
+        App.prepend(toTopDOM);
+    }
+    toTopDOM.addEventListener('click', () => {
+        document.documentElement.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+export function removeButtonAfterScroll() {
+    if (document.documentElement.scrollTop === 0 && App.querySelector('.to-top-btn')) {
+        App.removeChild(toTopDOM);
+    }
 }
 //# sourceMappingURL=Fuctions.js.map

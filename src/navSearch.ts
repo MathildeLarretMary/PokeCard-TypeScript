@@ -118,7 +118,7 @@ nav_search_by.addEventListener('click', () => {
             if(checkboxesGenChecked.length < listGen.length) {
                 let getAllBtn = document.createElement('button')! as HTMLButtonElement
                 getAllBtn.classList.add('get-all-btn')
-                getAllBtn.textContent = 'All'
+                getAllBtn.textContent = '↩︎'
                 getAllBtn.addEventListener('click', () => {
                     while(App.firstChild) {
                         App.removeChild(App.firstChild)
@@ -173,7 +173,7 @@ nav_search_by.addEventListener('click', () => {
             if(checkboxesTypesChecked.length < listType.length) {
                 let getAllBtn = document.createElement('button')! as HTMLButtonElement
                 getAllBtn.classList.add('get-all-btn')
-                getAllBtn.textContent = 'All'
+                getAllBtn.textContent = '↩︎'
                 getAllBtn.addEventListener('click', () => {
                     while(App.firstChild) {
                         App.removeChild(App.firstChild)
