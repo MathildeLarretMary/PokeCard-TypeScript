@@ -203,16 +203,17 @@ fieldset > button {
 }
 
 .card-modale {
-    margin: 10px auto;
+    margin: 0 auto;
 }
 
 .close-modale {
-    z-index: 0;
+    z-index: 2;
     position: absolute;
 
     height: 30px;
     width: 30px;
     border-radius: 30px;
+    padding-top: 3px;
 
     background-color: var(--dark-color);
     color: var(--light-color);
@@ -220,29 +221,77 @@ fieldset > button {
     border: none;
 
     margin: 10px;
-    right: 30px;
-    top: 30px;
+    left: 70vw;
+    top: 15px;
 }
 
 .card-stats-restist {
-    font-size: 0.8em;
-    background-color: var(--medium-color);
-    border: var(--dark-medium-color) 3px solid;
+    box-shadow: 3px 8px 7px 2px rgba(0,0,0,0.5);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.7em;
+    background-color: var(--light-medium-color);
+    border: var(--dark-color) 4px solid;
     border-radius: 20px;
     margin: 2px auto;
-    width: 90%;
+    width: 200px;
+    height: 260px;
 
     display: flex;
     flex-wrap: wrap;
 }
 
 .card-stat-resist {
-    background-color: var(--dark-medium-color);
+    background-color: var(--medium-color);
     border-radius: 20px;
     width: 48%;
-    font-size: smaller;
-
-    height: 30px;
     margin: 2px auto;
-    padding: 10px 10px 0;
+    padding: 6px 0;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
 }
+
+.immune {
+    border-radius: 10px;
+    padding: 0 3px;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.neutral {
+    padding: 0 3px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.vulnerable {
+    border-radius: 10px;
+    padding: 0 3px;
+    background-color: #ff5454;
+    color: var(--light-color);
+}
+
+.twice_vulnerable {
+    border-radius: 10px;
+    padding: 0 3px;
+    background-color: #de0000;
+    color: var(--light-color);
+}
+
+.resistant {
+    border-radius: 10px;
+    padding: 0 3px;
+    background-color: #00ff15;
+    color: var(--light-color);
+}
+
+.twice_resistant {
+    border-radius: 10px;
+    padding: 0 3px;
+    background-color: #2cbe00;
+    color: var(--light-color);
+}
+
+

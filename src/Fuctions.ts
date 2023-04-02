@@ -36,7 +36,7 @@ export function addPokeCards(data:Data[]) : void {
         pkm.apiTypes.forEach (element => {
             let pkmType = document.createElement('span')! as HTMLSpanElement
             pkmType.setAttribute('slot', 'slot-types')
-            pkmType.setAttribute('style', 'padding: 1px 4px 2px; border-radius: 10px; border: var(--darktype-color) 2px solid;')
+            pkmType.setAttribute('style', 'padding: 3px 4px 2px; border-radius: 10px; border: var(--darktype-color) 2px solid;')
             pkmType.textContent = element.name ?? ""
             pkmType.classList.add(element.name?.toLowerCase() ?? "")
             pokeCard.append(pkmType)
@@ -84,7 +84,15 @@ export function createModale(data:Data) : void {
         
         divCardStats.append(newStat)
     })
-    //console.log(pkm.apiTypes[0].name, pkm.apiTypes[1] ? pkm.apiTypes[1].name : "");
+
+    data.apiTypes.forEach (element => {
+        let pkmType = document.createElement('span')! as HTMLSpanElement
+        pkmType.setAttribute('slot', 'slot-types')
+        pkmType.setAttribute('style', 'padding: 3px 4px 2px; border-radius: 10px; border: var(--darktype-color) 2px solid;')
+        pkmType.textContent = element.name ?? ""
+        pkmType.classList.add(element.name?.toLowerCase() ?? "")
+        pokeCard.append(pkmType)
+    })
     
     closeBtn.addEventListener('click', () => {
         App.removeChild(divApp)

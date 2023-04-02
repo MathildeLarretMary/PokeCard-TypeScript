@@ -34,7 +34,7 @@ export function addPokeCards(data) {
             var _a, _b, _c;
             let pkmType = document.createElement('span');
             pkmType.setAttribute('slot', 'slot-types');
-            pkmType.setAttribute('style', 'padding: 1px 4px 2px; border-radius: 10px; border: var(--darktype-color) 2px solid;');
+            pkmType.setAttribute('style', 'padding: 3px 4px 2px; border-radius: 10px; border: var(--darktype-color) 2px solid;');
             pkmType.textContent = (_a = element.name) !== null && _a !== void 0 ? _a : "";
             pkmType.classList.add((_c = (_b = element.name) === null || _b === void 0 ? void 0 : _b.toLowerCase()) !== null && _c !== void 0 ? _c : "");
             pokeCard.append(pkmType);
@@ -72,7 +72,15 @@ export function createModale(data) {
         newStat.innerHTML = `${element.name} : <span class="${element.damage_relation}">x${element.damage_multiplier}</span>`;
         divCardStats.append(newStat);
     });
-    //console.log(pkm.apiTypes[0].name, pkm.apiTypes[1] ? pkm.apiTypes[1].name : "");
+    data.apiTypes.forEach(element => {
+        var _a, _b, _c;
+        let pkmType = document.createElement('span');
+        pkmType.setAttribute('slot', 'slot-types');
+        pkmType.setAttribute('style', 'padding: 3px 4px 2px; border-radius: 10px; border: var(--darktype-color) 2px solid;');
+        pkmType.textContent = (_a = element.name) !== null && _a !== void 0 ? _a : "";
+        pkmType.classList.add((_c = (_b = element.name) === null || _b === void 0 ? void 0 : _b.toLowerCase()) !== null && _c !== void 0 ? _c : "");
+        pokeCard.append(pkmType);
+    });
     closeBtn.addEventListener('click', () => {
         App.removeChild(divApp);
         if (App.querySelector('.get-all-btn')) {
