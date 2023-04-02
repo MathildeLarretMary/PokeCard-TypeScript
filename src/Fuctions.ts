@@ -33,6 +33,15 @@ export function addPokeCards(data:Data[]) : void {
         moreBtn.textContent = '+'
         pokeCard.append(moreBtn)
 
+        pkm.apiTypes.forEach (element => {
+            let pkmType = document.createElement('span')! as HTMLSpanElement
+            pkmType.setAttribute('slot', 'slot-types')
+            pkmType.setAttribute('style', 'padding: 1px 4px 2px; border-radius: 10px; border: var(--darktype-color) 2px solid;')
+            pkmType.textContent = element.name ?? ""
+            pkmType.classList.add(element.name?.toLowerCase() ?? "")
+            pokeCard.append(pkmType)
+        })
+
         App?.append(pokeCard)
     }
     // return data

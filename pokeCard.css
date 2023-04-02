@@ -93,3 +93,13 @@
     height: 13px;
     max-width: 102px;
 }
+
+.div-types {
+    position: absolute; 
+    top: 37%;
+    left: 0;
+    display: flex;
+    gap: 5px;
+    font-size: 0.8rem;
+    margin: 8px 10px 0;
+} 

@@ -20,6 +20,83 @@ export class PokeCard extends HTMLElement {
             font-weight: bolder;
             font-size: large;
         }
+        ::slotted(.normal) {
+            --darktype-color : #6D6D4E;
+            background-color: #A8A878;
+        }
+        ::slotted(.plante) {
+            --darktype-color : #4E8234;
+            background-color: #78C850;
+        }
+        ::slotted(.feu) {
+            --darktype-color : #9C531F;
+            background-color: #F08030;
+        }
+        ::slotted(.eau) {
+            --darktype-color : #445E9C;
+            background-color: #6890F0;
+        }
+        ::slotted(.électrik) {
+            --darktype-color : #A1871F;
+            background-color: #F8D030;
+        }
+        ::slotted(.glace) {
+            --darktype-color : #638D8D;
+            background-color: #98D8D8;
+        }
+        ::slotted(.combat) {
+            --darktype-color : #7D1F1A;
+            background-color: #C03028;
+        }
+        ::slotted(.poison) {
+            --darktype-color : #682A68;
+            background-color: #A040A0;
+        }
+        ::slotted(.sol) {
+            --darktype-color : #927D44;
+            background-color: #E0C068;
+        }
+        ::slotted(.vol) {
+            --darktype-color : #6D5E9C;
+            background-color: #A890F0;
+        }
+        ::slotted(.psy) {
+            --darktype-color : #A13959;
+            background-color: #F85888;
+        }
+        ::slotted(.insecte) {
+            --darktype-color : #6D7815;
+            background-color: #A8B820;
+        }
+        ::slotted(.roche) {
+            --darktype-color : #786824;
+            background-color: #B8A038;
+        }
+        ::slotted(.spectre) {
+            --darktype-color : #493963;
+            background-color: #705898;
+        }
+        ::slotted(.ténèbres) {
+            --darktype-color : #49392F;
+            background-color: #705848;
+        }
+        ::slotted(.dragon) {
+            --darktype-color : #4924A1;
+            background-color: #7038F8;
+        }
+        ::slotted(.acier) {
+            --darktype-color : #787887;
+            background-color: #B8B8D0;
+        }
+        ::slotted(.fée) {
+            --darktype-color : #9B6470;
+            background-color: #EE99AC;
+        }
+
+        ::slotted(span) {
+            color: var(--light-color);
+            border-radius: 10px;
+        }
         </style>
         `;
         let style = document.createElement('link');
@@ -56,11 +133,14 @@ export class PokeCard extends HTMLElement {
         cardDiv.append(image);
         const slotMoreBtn = document.createElement('slot'); // _data_id
         slotMoreBtn.name = "slot-more-btn";
-        // slotMoreBtn.classList.add('more')
         cardDiv.append(slotMoreBtn);
-        const slotModale = document.createElement('slot'); // _data_id
-        slotModale.name = "slot-modale";
-        cardDiv.append(slotModale);
+        const divTypes = document.createElement('div');
+        divTypes.classList.add('div-types');
+        const slotTypes = document.createElement('slot'); // _data_id
+        slotTypes.name = "slot-types";
+        slotTypes.classList.add('slotted-types');
+        divTypes.append(slotTypes);
+        cardDiv.append(divTypes);
         // stats--------------------------------------------------------------------------
         const stats = document.createElement('div');
         stats.classList.add('card-stats');

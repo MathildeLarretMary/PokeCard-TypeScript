@@ -30,6 +30,15 @@ export function addPokeCards(data) {
         });
         moreBtn.textContent = '+';
         pokeCard.append(moreBtn);
+        pkm.apiTypes.forEach(element => {
+            var _a, _b, _c;
+            let pkmType = document.createElement('span');
+            pkmType.setAttribute('slot', 'slot-types');
+            pkmType.setAttribute('style', 'padding: 1px 4px 2px; border-radius: 10px; border: var(--darktype-color) 2px solid;');
+            pkmType.textContent = (_a = element.name) !== null && _a !== void 0 ? _a : "";
+            pkmType.classList.add((_c = (_b = element.name) === null || _b === void 0 ? void 0 : _b.toLowerCase()) !== null && _c !== void 0 ? _c : "");
+            pokeCard.append(pkmType);
+        });
         App === null || App === void 0 ? void 0 : App.append(pokeCard);
     }
     // return data
