@@ -1,4 +1,4 @@
-import {  pkmNameList, PokemonName, fetchOnePkm, URL_ALL_PKM, fetchAllPkms, fetchPkmBy } from "./request.js";
+import { allPkms, pkmNameList, PokemonName, fetchOnePkm, URL_ALL_PKM, fetchAllPkms, fetchPkmBy } from "./request.js";
 import { toNoAccent, addPokeCards } from "./Fuctions.js";
 import { createModale } from "./Fuctions.js";
 import { App } from "./index.js";
@@ -178,7 +178,13 @@ nav_search_by.addEventListener('click', () => {
                     while(App.firstChild) {
                         App.removeChild(App.firstChild)
                     }
-                    fetchAllPkms(URL_ALL_PKM, addPokeCards)
+
+                    //TODO : remove this line
+                    // fetchAllPkms(URL_ALL_PKM, addPokeCards)
+
+                    // TODO: createDOM with all pkms on variable all Pkms
+                    console.log(allPkms);
+                    addPokeCards(allPkms)
                 })
                 App.prepend(getAllBtn)
             }

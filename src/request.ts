@@ -30,6 +30,36 @@ export const fetchAllPkms = async (_url:string , callback: (data : Data[]) => vo
         }
 
 }
+export let allPkms : Data[] = [] 
+
+export const stockAllPkms = async (_url:string) =>  {
+
+    try {
+        let response = await fetch(_url)
+        // .then(response => response.json())
+        // .then(data =>{ return data })
+
+        if(response.ok) {
+            // let data: Data[] | void = await response.json()
+            await response.json()
+            .then(datum =>  {
+                console.log(datum);
+                allPkms = datum;
+                return allPkms
+            })
+            
+            // return pour finir l'instruction de la fonction
+            // array.push(data)
+        }
+        throw new Error('Impossible de contacter le Serveur')
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+console.log(allPkms);
+
 
 /**
  * 

@@ -1,6 +1,6 @@
 import './navSearch.js'
 import { PokeCard } from './pokeCard.js';
-import { fetchAllPkms, URL_ALL_PKM } from './request.js';
+import { fetchAllPkms, URL_ALL_PKM, stockAllPkms, allPkms } from './request.js';
 import { addPokeCards, scrollToTop, removeButtonAfterScroll } from './Fuctions.js';
 
 export const App = document.querySelector('#app')! as HTMLDivElement
@@ -10,3 +10,6 @@ window.addEventListener('scroll', scrollToTop)
 window.addEventListener('scroll', removeButtonAfterScroll)
 
 fetchAllPkms(URL_ALL_PKM, addPokeCards)
+stockAllPkms(URL_ALL_PKM)
+
+console.log(allPkms);

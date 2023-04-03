@@ -33,6 +33,30 @@ export const fetchAllPkms = (_url, callback) => __awaiter(void 0, void 0, void 0
         console.log(error);
     }
 });
+export let allPkms = [];
+export const stockAllPkms = (_url) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        let response = yield fetch(_url);
+        // .then(response => response.json())
+        // .then(data =>{ return data })
+        if (response.ok) {
+            // let data: Data[] | void = await response.json()
+            yield response.json()
+                .then(datum => {
+                console.log(datum);
+                allPkms = datum;
+                return allPkms;
+            });
+            // return pour finir l'instruction de la fonction
+            // array.push(data)
+        }
+        throw new Error('Impossible de contacter le Serveur');
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+console.log(allPkms);
 /**
  *
  * @param _url paramètre qui prend l'URL pour la méthodes fetch()
